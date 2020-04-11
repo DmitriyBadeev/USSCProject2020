@@ -1,0 +1,227 @@
+2020-04-09 01:01:03.484 +05:00 [Information] USSC.Web.Program: Seeding database
+2020-04-09 01:01:17.825 +05:00 [Information] USSC.Services.SeedData: Migrating database
+2020-04-09 01:01:19.539 +05:00 [Information] USSC.Services.SeedData: Migrated successfully
+2020-04-09 01:01:19.825 +05:00 [Information] USSC.Services.SeedData: Adding default roles
+2020-04-09 01:01:20.260 +05:00 [Information] USSC.Services.SeedData: Default roles added successfully
+2020-04-09 01:01:20.269 +05:00 [Information] USSC.Services.SeedData: Adding subsystems
+2020-04-09 01:01:20.334 +05:00 [Information] USSC.Services.SeedData: Subsystems Added successfully
+2020-04-09 01:01:20.350 +05:00 [Information] USSC.Services.SeedData: Adding default permissions
+2020-04-09 01:01:20.669 +05:00 [Information] USSC.Services.SeedData: Default permissions added successfully
+2020-04-09 01:01:20.680 +05:00 [Information] USSC.Services.SeedData: Registration superuser
+2020-04-09 01:01:20.684 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Главный администратор - admin
+2020-04-09 01:01:20.784 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Главный администратор - admin registered successfully
+2020-04-09 01:01:20.790 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Главный администратор - admin
+2020-04-09 01:01:20.842 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Главный администратор - admin successfully
+2020-04-09 01:01:20.846 +05:00 [Information] USSC.Services.SeedData: Superuser added successfully
+2020-04-09 01:01:20.851 +05:00 [Information] USSC.Web.Program: Seeded database success
+2020-04-09 01:01:27.704 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-09 01:01:27.713 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User not found
+2020-04-09 01:01:33.579 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user admin
+2020-04-09 01:01:33.747 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 01:03:21.567 +05:00 [Information] USSC.Web.Program: Seeding database
+2020-04-09 01:03:29.936 +05:00 [Information] USSC.Web.Program: Seeded database success
+2020-04-09 01:03:59.830 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Дмитрий Бадеев - dmitriibadeev@gmail.com
+2020-04-09 01:04:00.118 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Дмитрий Бадеев - dmitriibadeev@gmail.com registered successfully
+2020-04-09 01:04:00.123 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Дмитрий Бадеев - dmitriibadeev@gmail.com
+2020-04-09 01:04:00.189 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Дмитрий Бадеев - dmitriibadeev@gmail.com successfully
+2020-04-09 01:04:00.194 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-09 01:04:00.220 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 01:11:20.614 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 01:11:21.239 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 01:11:24.139 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 01:12:56.385 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 01:12:56.787 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 01:12:59.569 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 01:13:54.534 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user admin
+2020-04-09 01:13:54.565 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 15:37:11.473 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 15:37:12.155 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 15:37:18.126 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 15:37:41.772 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user admin
+2020-04-09 15:37:42.147 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 15:37:49.711 +05:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'USSC.Services.PermissionServices.IAccessManager' while attempting to activate 'USSC.Web.Controllers.AdminController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-04-09 15:38:58.400 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 15:38:59.642 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 15:39:03.961 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 15:39:19.563 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - �����������������
+2020-04-09 15:39:22.043 +05:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Subsystem has not found
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(Int32 userId, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 38
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(String email, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 24
+   at USSC.Web.Controllers.AdminController.Index() in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Web\Controllers\AdminController.cs:line 29
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-04-09 15:45:41.876 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 15:45:42.194 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 15:45:44.488 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 15:45:56.703 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Администрирование
+2020-04-09 15:45:56.768 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has permission for access in subsystem Администрирование
+2020-04-09 15:46:10.745 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-09 15:46:10.774 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 15:46:12.924 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-09 15:46:12.932 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-09 15:46:45.874 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Дмитрий Бадеев - dmitriibadeev@gmail.com
+2020-04-09 15:46:45.892 +05:00 [Warning] USSC.Services.UserServices.RegistrationService: User with email dmitriibadeev@gmail.com already exist
+2020-04-09 15:47:13.395 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Дмитрий Романов - dmitriibadeev@mail.ru
+2020-04-09 15:47:13.627 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Дмитрий Романов - dmitriibadeev@mail.ru registered successfully
+2020-04-09 15:47:13.632 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Дмитрий Романов - dmitriibadeev@mail.ru
+2020-04-09 15:47:13.681 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Дмитрий Романов - dmitriibadeev@mail.ru successfully
+2020-04-09 15:47:13.684 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@mail.ru
+2020-04-09 15:47:13.691 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 15:47:26.800 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - Администрирование
+2020-04-09 15:47:26.828 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 3 has not permission for access in subsystem Администрирование
+2020-04-09 16:03:40.139 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 16:03:40.750 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 16:03:43.211 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 16:03:57.332 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - �����������������
+2020-04-09 16:03:58.834 +05:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Subsystem has not found
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(Int32 userId, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 38
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(String email, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 24
+   at USSC.Web.Controllers.AdminController.Index() in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Web\Controllers\AdminController.cs:line 29
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-04-09 16:04:52.393 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 16:04:52.879 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 16:04:55.405 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 16:05:32.586 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - �����������������
+2020-04-09 16:05:34.650 +05:00 [Error] Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware: An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Subsystem has not found
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(Int32 userId, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 38
+   at USSC.Services.PermissionServices.AccessManager.HasPermission(String email, String subsystemName) in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\PermissionServices\AccessManager.cs:line 24
+   at USSC.Web.Controllers.AdminController.Index() in C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Web\Controllers\AdminController.cs:line 29
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2020-04-09 16:17:01.434 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 16:17:02.039 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 16:17:19.494 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 16:36:09.967 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 16:36:10.510 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 16:36:18.202 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 16:36:28.038 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - Администрирование
+2020-04-09 16:36:28.121 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 3 has not permission for access in subsystem Администрирование
+2020-04-09 16:42:05.872 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 16:42:06.293 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 16:42:11.865 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 16:48:10.796 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - Персонал
+2020-04-09 16:48:10.853 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 3 has permission for access in subsystem Персонал
+2020-04-09 18:28:53.871 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 18:28:54.678 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 18:29:00.486 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 18:29:20.712 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - Персонал
+2020-04-09 18:29:20.732 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 3 has permission for access in subsystem Персонал
+2020-04-09 18:29:30.436 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-09 18:29:30.462 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 18:29:32.749 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-09 18:29:32.769 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-09 18:29:40.930 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user admin
+2020-04-09 18:29:40.946 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 18:29:43.536 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Администрирование
+2020-04-09 18:29:43.688 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has permission for access in subsystem Администрирование
+2020-04-09 18:29:50.378 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Администрирование
+2020-04-09 18:29:50.384 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has permission for access in subsystem Администрирование
+2020-04-09 18:31:06.864 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 18:31:07.227 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 18:31:09.901 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 18:32:11.590 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Администрирование
+2020-04-09 18:32:11.655 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has permission for access in subsystem Администрирование
+2020-04-09 18:36:03.437 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 18:36:03.795 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 18:36:06.215 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 18:36:46.319 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Персонал
+2020-04-09 18:36:46.347 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has not permission for access in subsystem Персонал
+2020-04-09 18:43:39.512 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 18:43:40.180 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 18:43:53.774 +05:00 [Information] USSC.Services.SeedData: Migrating database
+2020-04-09 18:43:55.748 +05:00 [Information] USSC.Services.SeedData: Migrated successfully
+2020-04-09 18:43:56.035 +05:00 [Information] USSC.Services.SeedData: Adding default roles
+2020-04-09 18:43:56.390 +05:00 [Information] USSC.Services.SeedData: Default roles added successfully
+2020-04-09 18:43:56.401 +05:00 [Information] USSC.Services.SeedData: Adding subsystems
+2020-04-09 18:43:56.451 +05:00 [Information] USSC.Services.SeedData: Subsystems Added successfully
+2020-04-09 18:43:56.460 +05:00 [Information] USSC.Services.SeedData: Adding default permissions
+2020-04-09 18:43:56.810 +05:00 [Information] USSC.Services.SeedData: Default permissions added successfully
+2020-04-09 18:43:56.818 +05:00 [Information] USSC.Services.SeedData: Registration superuser
+2020-04-09 18:43:56.825 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Главный администратор - admin
+2020-04-09 18:43:56.979 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Главный администратор - admin registered successfully
+2020-04-09 18:43:56.984 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Главный администратор - admin
+2020-04-09 18:43:57.022 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Главный администратор - admin successfully
+2020-04-09 18:43:57.025 +05:00 [Information] USSC.Services.SeedData: Superuser added successfully
+2020-04-09 18:43:57.027 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 18:44:26.688 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 1 in subsystem - Администрирование
+2020-04-09 18:44:26.695 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 1 has permission for access in subsystem Администрирование
+2020-04-09 18:44:53.534 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Дмитрий Бадеев - dmitriibadeev@gmail.com
+2020-04-09 18:44:53.556 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Дмитрий Бадеев - dmitriibadeev@gmail.com registered successfully
+2020-04-09 18:44:53.559 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Дмитрий Бадеев - dmitriibadeev@gmail.com
+2020-04-09 18:44:53.570 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Дмитрий Бадеев - dmitriibadeev@gmail.com successfully
+2020-04-09 18:44:53.574 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-09 18:44:53.584 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-09 18:44:58.337 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Персонал
+2020-04-09 18:44:58.343 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Персонал
+2020-04-09 18:46:32.840 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-09 18:46:33.229 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-09 18:46:35.573 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-09 18:46:41.725 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-09 18:46:41.746 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-09 19:18:15.489 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-09 19:18:15.509 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-09 19:28:50.409 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-09 19:28:50.437 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-09 19:28:53.134 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Персонал
+2020-04-09 19:28:53.139 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Персонал

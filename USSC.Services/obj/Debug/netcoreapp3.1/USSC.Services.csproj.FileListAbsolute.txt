@@ -1,0 +1,11 @@
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.deps.json
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.dll
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.csprojAssemblyReference.cache
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.AssemblyInfo.cs
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.pdb
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Infrastructure.dll
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Infrastructure.pdb
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.csproj.CopyComplete
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.dll
+C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.pdb

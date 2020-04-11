@@ -1,0 +1,77 @@
+﻿@inject IUserDataService dataService
+@inject IAccessManager accessManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - USSC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h5 class="my-0 mr-md-auto font-weight-normal">UCCS</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            @if (User.Identity.IsAuthenticated)
+            {
+                var userData = await dataService.GetUserData(User.Identity.Name);
+                var userRoles = await dataService.GetUserRoles(userData.Id);
+                var accessibleSubsystems = await accessManager.GetAccessibleSubsystems(userData.Id);
+
+                <a class="p-2 text-dark" asp-controller="Home" asp-action="Index">Главная</a>
+
+                @if (accessibleSubsystems.Contains(Constants.PersonalSubsystem))
+                {
+                    <a class="p-2 text-dark" asp-controller="Personal" asp-action="Index">@Constants.PersonalSubsystem</a>
+                }
+
+                @if (accessibleSubsystems.Contains(Constants.TransportSubsystem))
+                {
+                    <a class="p-2 text-dark" asp-controller="Transport" asp-action="Index">@Constants.TransportSubsystem</a>
+                }
+
+                @if (accessibleSubsystems.Contains(Constants.DocumentSubsystem))
+                {
+                    <a class="p-2 text-dark" asp-controller="Document" asp-action="Index">@Constants.DocumentSubsystem</a>
+                }
+
+                @if (accessibleSubsystems.Contains(Constants.RegistrySubsystem))
+                {
+                    <a class="p-2 text-dark" asp-controller="Registry" asp-action="Index">@Constants.RegistrySubsystem</a>
+                }
+
+                @if (accessibleSubsystems.Contains(Constants.AdminSubsystem))
+                {
+                    <a class="p-2 text-dark mr-1" asp-controller="Admin" asp-action="Index">@Constants.AdminSubsystem</a>
+                }
+
+                <span class="ml-2 p-2 text-dark">@userData.Name @userData.LastName, вы @string.Join(", ", userRoles.Select(r => r.Name))</span>
+                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Logout">Выйти</a>
+            }
+            else
+            {
+                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Sign up</a>
+                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Sign in</a>
+            }
+        </nav>
+    </header>
+   
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - USSC
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
