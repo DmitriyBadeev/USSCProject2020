@@ -21,20 +21,16 @@ namespace USSC.Web.Controllers
             _userDataService = userDataService;
             _adminSubsystemName = Constants.AdminSubsystem;
         }
-<<<<<<< HEAD
-        
-=======
 
         [HttpGet]
->>>>>>> 1b2067e4b193ba2f3a67b29c060ef9824486a4a5
         [Authorize]
         public async Task<IActionResult> Index()
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
-            var users = _userDataService.GetAllUsers();
 
             if (hasPermission)
             {
+                var users = _userDataService.GetAllUsers();
                 return View(users);
             }
 

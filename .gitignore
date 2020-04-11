@@ -1,3 +1,11 @@
 .git
 .vs
 .editorconfig
+USSC.Infrastructure/bin
+USSC.Infrastructure/obj
+USSC.Services/bin
+USSC.Services/obj
+USSC.Services.Test/bin
+USSC.Services.Test/obj
+USSC.Web/bin
+USSC.Web/obj
