@@ -1,0 +1,17 @@
+2020-04-11 22:02:48.055 +05:00 [Information] USSC.Web.Program: Running application
+2020-04-11 22:02:48.946 +05:00 [Information] USSC.Services.SeedData: Seeding database
+2020-04-11 22:02:59.027 +05:00 [Information] USSC.Services.SeedData: Database seeded successfully
+2020-04-11 22:03:08.692 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user dmitriibadeev@gmail.com
+2020-04-11 22:03:09.445 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-11 22:03:16.309 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-11 22:03:16.378 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-11 22:03:43.659 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Registration user Сергей Бадеев - normcontrol@urfu.ru
+2020-04-11 22:03:44.074 +05:00 [Information] USSC.Services.UserServices.RegistrationService: User Сергей Бадеев - normcontrol@urfu.ru registered successfully
+2020-04-11 22:03:44.105 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Adding roles for user Сергей Бадеев - normcontrol@urfu.ru
+2020-04-11 22:03:44.231 +05:00 [Information] USSC.Services.UserServices.RegistrationService: Roles Added for user Сергей Бадеев - normcontrol@urfu.ru successfully
+2020-04-11 22:03:44.340 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 2 in subsystem - Администрирование
+2020-04-11 22:03:44.368 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 2 has permission for access in subsystem Администрирование
+2020-04-11 22:03:55.523 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: Authenticating user normcontrol@urfu.ru
+2020-04-11 22:03:55.545 +05:00 [Information] USSC.Services.UserServices.AuthorizationService: User authenticated successfully
+2020-04-11 22:04:05.855 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: Checking permission for user with id - 3 in subsystem - Персонал
+2020-04-11 22:04:05.865 +05:00 [Information] USSC.Services.PermissionServices.AccessManager: User with id - 3 has permission for access in subsystem Персонал

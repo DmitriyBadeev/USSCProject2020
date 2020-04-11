@@ -18,7 +18,7 @@ namespace USSC.Web.Controllers
             _accessManager = accessManager;
             _adminSubsystemName = Constants.AdminSubsystem;
         }
-
+        
         [Authorize]
         public async Task<IActionResult> Index()
         {

@@ -38,8 +38,7 @@ namespace USSC.Web.Controllers
 
                 if (user != null)
                 {
-                    await _authorizationService.Authenticate(model.Email, model.Password, HttpContext);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 
                 ModelState.AddModelError("", "Пользователь с таким Email уже существует");
