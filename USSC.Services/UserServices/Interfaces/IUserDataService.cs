@@ -8,5 +8,7 @@ namespace USSC.Services.UserServices.Interfaces
     {
         Task<User> GetUserData(string email);
         Task<List<Role>> GetUserRoles(int userId);
+
+        IEnumerable<User> GetAllUsers();
     }
 }
