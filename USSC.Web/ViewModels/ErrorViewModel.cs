@@ -1,6 +1,4 @@
-using System;
-
-namespace USSC.Web.Models
+namespace USSC.Web.ViewModels
 {
     public class ErrorViewModel
     {

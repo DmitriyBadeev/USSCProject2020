@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using USSC.Services;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
+using USSC.Web.ViewModels;
 
 namespace USSC.Web.Controllers
 {
@@ -31,7 +33,17 @@ namespace USSC.Web.Controllers
             if (hasPermission)
             {
                 var users = _userDataService.GetAllUsers();
-                return View(users);
+
+                var viewModels = users.Select(u => new UserViewModel()
+                {
+                    Id = u.Id,
+                    Email = u.Email,
+                    Name = $"{u.Name} {u.LastName}",
+                    Roles = string.Join(", ", _userDataService.GetUserRoles(u.Id).Result),
+                    Accesses = string.Join(", ", _accessManager.GetAccessibleSubsystems(u.Id).Result)
+                });
+                
+                return View(viewModels);
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);

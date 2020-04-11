@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
@@ -22,11 +23,11 @@ namespace USSC.Services.UserServices
             return user;
         }
 
-        public async Task<List<Role>> GetUserRoles(int userId)
+        public async Task<IEnumerable<string>> GetUserRoles(int userId)
         {
             var roles = await _applicationData.Data.Users.GetUserRoles(userId);
 
-            return roles;
+            return roles.Select(r => r.Name);
         }
 
         public IEnumerable<User> GetAllUsers()
