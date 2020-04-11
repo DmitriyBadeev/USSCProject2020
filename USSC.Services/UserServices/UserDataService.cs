@@ -28,5 +28,12 @@ namespace USSC.Services.UserServices
 
             return roles;
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            var users = _applicationData.Data.Users.GetAll();
+
+            return users;
+        }
     }
 }

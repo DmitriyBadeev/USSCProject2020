@@ -2,7 +2,23 @@
 @{
     ViewData["Title"] = "Администрирование";
 }
+@model IEnumerable<User>
 
+<<<<<<< HEAD
 <h1 class="display-4">Подсистема «Администрирование»</h1>
+=======
+    <h1 class="display-4">Подсистема «Администрирование»</h1>
+    <table class="table">
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.Name</td>
+            <td>@user.LastName</td>
+        </tr>
+        }
+    </table>
+>>>>>>> 1b2067e4b193ba2f3a67b29c060ef9824486a4a5
 
 <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Зарегистрировать пользователя</a>
