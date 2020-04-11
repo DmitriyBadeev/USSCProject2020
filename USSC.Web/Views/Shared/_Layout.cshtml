@@ -47,12 +47,11 @@
                     <a class="p-2 text-dark mr-1" asp-controller="Admin" asp-action="Index">@Constants.AdminSubsystem</a>
                 }
 
-                <span class="ml-2 p-2 text-dark">@userData.Name @userData.LastName, вы @string.Join(", ", userRoles.Select(r => r.Name))</span>
+                <span class="ml-2 p-2 text-dark">@userData.Name @userData.LastName, вы @string.Join(", ", userRoles)</span>
                 <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Logout">Выйти</a>
             }
             else
             {
-                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Sign up</a>
                 <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Sign in</a>
             }
         </nav>

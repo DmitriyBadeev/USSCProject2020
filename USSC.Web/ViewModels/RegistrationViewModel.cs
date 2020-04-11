@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace USSC.Web.ViewModels
 {
@@ -17,12 +13,15 @@ namespace USSC.Web.ViewModels
         [Required(ErrorMessage = "Не указана фамилия")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Не указан пароль")]
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Выберите роль")]
+        public string Role { get; set; }
     }
 }

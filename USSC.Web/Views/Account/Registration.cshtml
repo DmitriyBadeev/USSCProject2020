@@ -3,7 +3,7 @@
     ViewData["Title"] = "Registration";
 }
 
-@model USSC.Web.ViewModels.RegistrationViewModel
+@model RegistrationViewModel
 
 
 <h1 class="display-4">Регистрация</h1>
@@ -25,6 +25,13 @@
             <label asp-for="LastName">Введите Фамилию</label><br />
             <input class="form-control" type="text" asp-for="LastName" />
             <span class="invalid-feedback" asp-validation-for="LastName" />
+        </div>
+        <div class="form-group col-lg-4">
+            <label asp-for="Role">Введите пароль</label><br />
+            <select class="form-control" asp-for="Role">
+                
+            </select>
+            <span class="invalid-feedback" asp-validation-for="Password" />
         </div>
         <div class="form-group col-lg-4">
             <label asp-for="Password">Введите пароль</label><br />

@@ -7,7 +7,7 @@ namespace USSC.Services.PermissionServices
     {
         Task<bool> HasPermission(string email, string subsystemName);
         Task<bool> HasPermission(int userId, string subsystemName);
-        Task<List<string>> GetAccessibleSubsystems(string email);
-        Task<List<string>> GetAccessibleSubsystems(int userId);
+        Task<IEnumerable<string>> GetAccessibleSubsystems(string email);
+        Task<IEnumerable<string>> GetAccessibleSubsystems(int userId);
     }
 }

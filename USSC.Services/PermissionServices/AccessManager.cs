@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -49,30 +50,20 @@ namespace USSC.Services.PermissionServices
             return false;
         }
 
-        public async Task<List<string>> GetAccessibleSubsystems(string email)
+        public async Task<IEnumerable<string>> GetAccessibleSubsystems(string email)
         {
             var user = await _applicationData.Data.Users.FindUserByEmail(email);
             return await GetAccessibleSubsystems(user.Id);
         }
 
-        public async Task<List<string>> GetAccessibleSubsystems(int userId)
+        public async Task<IEnumerable<string>> GetAccessibleSubsystems(int userId)
         {
             var subsystems = _applicationData.Data.Subsystems.GetAll();
             var roles = await _applicationData.Data.Users.GetUserRoles(userId);
 
-            var accessibleSubsystems = new List<string>();
-
-            foreach (var subsystem in subsystems)
-            {
-                var hasPermission = _applicationData.Data.Subsystems.HasPermission(roles, subsystem);
-
-                if (hasPermission)
-                {
-                    accessibleSubsystems.Add(subsystem.Name);
-                }
-            }
-
-            return accessibleSubsystems;
+            return subsystems
+                .Where(s => _applicationData.Data.Subsystems.HasPermission(roles, s))
+                .Select(s => s.Name);
         }
     }
 }
