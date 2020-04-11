@@ -4977,24 +4977,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\Дмитрий\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Проекты\\УЦСБ проект\\USSC\\USSC.Infrastructure\\USSC.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Дмитрий\\Desktop\\USSC\\USSC.Infrastructure\\USSC.Infrastructure.csproj",
       "projectName": "USSC.Infrastructure",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\Проекты\\УЦСБ проект\\USSC\\USSC.Infrastructure\\USSC.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\Проекты\\УЦСБ проект\\USSC\\USSC.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\Дмитрий\\Desktop\\USSC\\USSC.Infrastructure\\USSC.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Дмитрий\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Дмитрий\\Desktop\\USSC\\USSC.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Дмитрий\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

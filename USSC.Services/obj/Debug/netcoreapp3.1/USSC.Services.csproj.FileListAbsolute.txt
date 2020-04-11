@@ -9,3 +9,14 @@ C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\b
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.csproj.CopyComplete
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.dll
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.pdb
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.deps.json
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.dll
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Services.pdb
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Infrastructure.dll
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\bin\Debug\netcoreapp3.1\USSC.Infrastructure.pdb
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.csprojAssemblyReference.cache
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.AssemblyInfoInputs.cache
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.AssemblyInfo.cs
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.csproj.CopyComplete
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.dll
+C:\Users\Дмитрий\Desktop\USSC\USSC.Services\obj\Debug\netcoreapp3.1\USSC.Services.pdb

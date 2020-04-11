@@ -8,3 +8,13 @@ C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Infrastruc
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.pdb
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.dll
 C:\Users\Admin\Desktop\Проекты\УЦСБ проект\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.pdb
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.deps.json
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.runtimeconfig.json
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.runtimeconfig.dev.json
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.dll
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\bin\Debug\netcoreapp3.1\USSC.Infrastructure.pdb
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.AssemblyInfo.cs
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.dll
+C:\Users\Дмитрий\Desktop\USSC\USSC.Infrastructure\obj\Debug\netcoreapp3.1\USSC.Infrastructure.pdb

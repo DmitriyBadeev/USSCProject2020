@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "Администрирование";
 }
+@model IEnumerable<User>
 
     <h1 class="display-4">Подсистема «Администрирование»</h1>
+    <table class="table">
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.Name</td>
+            <td>@user.LastName</td>
+        </tr>
+        }
+    </table>
 

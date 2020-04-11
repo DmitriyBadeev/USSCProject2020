@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSC.Web", "USSC.Web\USSC.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSC.Infrastructure", "USSC.Infrastructure\USSC.Infrastructure.csproj", "{9C52D853-D2B2-4326-BCBE-B303653BF6F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USSC.Services", "USSC.Services\USSC.Services.csproj", "{ED9436A2-8FEE-47D0-B2E3-5CEDC8C5642F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSC.Services", "USSC.Services\USSC.Services.csproj", "{ED9436A2-8FEE-47D0-B2E3-5CEDC8C5642F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USSC.Services.Test", "USSC.Services.Test\USSC.Services.Test.csproj", "{EDC96A47-E38A-4D5F-ACC8-77B93D10113E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USSC.Services.Test", "USSC.Services.Test\USSC.Services.Test.csproj", "{EDC96A47-E38A-4D5F-ACC8-77B93D10113E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
