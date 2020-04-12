@@ -9,6 +9,8 @@ namespace USSC.Infrastructure.Interfaces
 
         ISubsystemRepository Subsystems { get; }
 
+        IRoleRepository Roles { get; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

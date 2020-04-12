@@ -16,13 +16,6 @@ namespace USSC.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Role> FindRole(string role)
-        {
-            var roleEntity = await _context.Roles.FirstOrDefaultAsync(r => r.Name == role);
-
-            return roleEntity;
-        }
-
         public async Task<User> FindUserByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);

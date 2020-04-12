@@ -30,6 +30,15 @@ namespace USSC.Services.UserServices
             return roles.Select(r => r.Name);
         }
 
+        public IEnumerable<string> GetAllRoles()
+        {
+            var allRoles = _applicationData.Data.Roles
+                .GetAll()
+                .Select(r => r.Name);
+
+            return allRoles;
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             var users = _applicationData.Data.Users.GetAll();

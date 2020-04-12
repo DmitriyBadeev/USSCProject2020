@@ -55,7 +55,7 @@ namespace USSC.Services.UserServices
 
             foreach (var role in roles)
             {
-                var roleEntity = await _dataService.Data.Users.FindRole(role);
+                var roleEntity = await _dataService.Data.Roles.FindRole(role);
                 _dataService.Data.Users.AssignRole(roleEntity, userEntity);
                 await _dataService.Data.SaveChangesAsync();
             }
