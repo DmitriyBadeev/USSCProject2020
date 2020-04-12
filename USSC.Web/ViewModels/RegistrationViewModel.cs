@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace USSC.Web.ViewModels
 {
@@ -21,7 +22,7 @@ namespace USSC.Web.ViewModels
         [Compare("Password", ErrorMessage = "Пароль введен неверно")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Выберите роль")]
-        public string Role { get; set; }
+        [Required(ErrorMessage = "Выберите роли")]
+        public List<RoleOption> Roles { get; set; }
     }
 }

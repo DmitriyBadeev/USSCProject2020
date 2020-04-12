@@ -15,6 +15,7 @@ namespace USSC.Infrastructure
 
         private UserRepository _users;
         private SubsystemRepository _subsystems;
+        private RoleRepository _roles;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -34,6 +35,14 @@ namespace USSC.Infrastructure
             get
             {
                 return _subsystems ??= new SubsystemRepository(_context);
+            }
+        }
+
+        public IRoleRepository Roles
+        {
+            get
+            {
+                return _roles ??= new RoleRepository(_context);
             }
         }
 

@@ -4,9 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using USSC.Services;
+using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
 using USSC.Web.ViewModels;
+using IAuthorizationService = USSC.Services.UserServices.Interfaces.IAuthorizationService;
 
 namespace USSC.Web.Controllers
 {
@@ -14,27 +18,56 @@ namespace USSC.Web.Controllers
     {
         private readonly IRegistrationService _registrationService;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IAccessManager _accessManager;
+        private readonly IUserDataService _userData;
+        private readonly string _adminSubsystem;
 
-        public AccountController(IRegistrationService registrationService, IAuthorizationService authorizationService)
+        public AccountController(IRegistrationService registrationService, IAuthorizationService authorizationService, 
+            IAccessManager accessManager, IUserDataService userData)
         {
             _registrationService = registrationService;
             _authorizationService = authorizationService;
+            _accessManager = accessManager;
+            _userData = userData;
+            _adminSubsystem = Constants.AdminSubsystem;
         }
 
         [HttpGet]
-        public IActionResult Registration()
+        [Authorize]
+        public async Task<IActionResult> Registration()
         {
-            return View();
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystem);
+
+            if (hasPermission)
+            {
+                var roles = _userData.GetAllRoles();
+                var options = roles.Select(r => new RoleOption() {RoleName = r}).ToList();
+                var viewModel = new RegistrationViewModel() { Roles = options }; 
+                return View(viewModel);
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registration(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _registrationService.RegisterUser(model.Email, model.Name, model.LastName, model.Password, 
-                    new List<string> { "Пользователь" });
+                var roles = model.Roles
+                    .FindAll(r => r.IsOptionSelected)
+                    .Select(r => r.RoleName)
+                    .ToList();
+
+                if (roles.Count == 0)
+                {
+                    ModelState.AddModelError("", "Выберите хотя бы одну роль");
+                    return View(model);
+                }
+
+                var user = await _registrationService.RegisterUser(model.Email, model.Name, model.LastName, model.Password, roles);
 
                 if (user != null)
                 {

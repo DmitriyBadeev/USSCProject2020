@@ -8,7 +8,6 @@ namespace USSC.Infrastructure.Interfaces
     {
         Task<User> FindUserByEmail(string email);
         void AssignRole(Role role, User user);
-        Task<Role> FindRole(string role);
         Task<List<Role>> GetUserRoles(int userId);
     }
 }
