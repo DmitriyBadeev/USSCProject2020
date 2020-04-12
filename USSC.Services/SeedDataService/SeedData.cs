@@ -97,13 +97,13 @@ namespace USSC.Services
                         continue;
                     
                     var subsystemEntity = _applicationData.Data.Subsystems.GetSubsystemByName(subsystem.Name);
-                    var userRole = _applicationData.Data.Users.FindRole(_defaultRoles[1].Name).Result;
+                    var userRole = _applicationData.Data.Roles.FindRole(_defaultRoles[1].Name).Result;
                     _applicationData.Data.Subsystems.IssuePermission(userRole, subsystemEntity);
                 }
 
                 foreach (var subsystem in _subsystems)
                 {
-                    var adminRole = _applicationData.Data.Users.FindRole(_defaultRoles[0].Name).Result;
+                    var adminRole = _applicationData.Data.Roles.FindRole(_defaultRoles[0].Name).Result;
                     _applicationData.Data.Subsystems.IssuePermission(adminRole, subsystem);
                 }
 

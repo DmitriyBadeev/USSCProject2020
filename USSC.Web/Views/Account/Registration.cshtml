@@ -1,10 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Registration";
+    ViewData["Title"] = "Регистрация пользователя";
 }
 
 @model RegistrationViewModel
-
 
 <h1 class="display-4">Регистрация</h1>
 
@@ -27,11 +26,17 @@
             <span class="invalid-feedback" asp-validation-for="LastName" />
         </div>
         <div class="form-group col-lg-4">
-            <label asp-for="Role">Введите пароль</label><br />
-            <select class="form-control" asp-for="Role">
-                
-            </select>
-            <span class="invalid-feedback" asp-validation-for="Password" />
+            <label asp-for="Roles">Выберите роли</label><br />
+            @for (var i = 0; i < Model.Roles.Count; i++)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" asp-for="Roles[i].IsOptionSelected" />
+                    <input type="text" asp-for="Roles[i].RoleName" value="@Model.Roles[i].RoleName" hidden/>
+                    <label class="form-check-label" asp-for="Roles[i].IsOptionSelected">@Model.Roles[i].RoleName</label>
+                </div>
+            }
+
+            <span class="invalid-feedback" asp-validation-for="Roles" />
         </div>
         <div class="form-group col-lg-4">
             <label asp-for="Password">Введите пароль</label><br />

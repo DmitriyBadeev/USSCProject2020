@@ -23,6 +23,13 @@ namespace USSC.Services.UserServices
             return user;
         }
 
+        public async Task<User> GetUserData(int id)
+        {
+            var user = await _applicationData.Data.Users.FindUserById(id);
+
+            return user;
+        }
+
         public async Task<IEnumerable<string>> GetUserRoles(int userId)
         {
             var roles = await _applicationData.Data.Users.GetUserRoles(userId);
@@ -30,11 +37,53 @@ namespace USSC.Services.UserServices
             return roles.Select(r => r.Name);
         }
 
+        public IEnumerable<string> GetAllRoles()
+        {
+            var allRoles = _applicationData.Data.Roles
+                .GetAll()
+                .Select(r => r.Name);
+
+            return allRoles;
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             var users = _applicationData.Data.Users.GetAll();
 
             return users;
+        }
+
+        public async Task<User> EditUser(int id, string email, string name, string lastName, string password,
+            IEnumerable<string> roles)
+        {
+            var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == id);
+
+            editUser.Email = email;
+            editUser.Name = name;
+            editUser.LastName = lastName;
+            editUser.Password = password;
+            await _applicationData.Data.SaveChangesAsync();
+
+            await AddRoles(editUser, roles);
+
+            return editUser;
+        }
+
+        private async Task AddRoles(User user, IEnumerable<string> roles)
+        {
+            var userEntity = await _applicationData.Data.Users.FindUserById(user.Id);
+            var userRoles = await _applicationData.Data.Users.GetUserRoles(user.Id);
+
+            foreach (var role in roles)
+            {
+                var roleEntity = await _applicationData.Data.Roles.FindRole(role);
+
+                foreach (var userRole in userRoles)
+                    if (!(userRole == roleEntity))
+                        _applicationData.Data.Users.AssignRole(roleEntity, userEntity);
+
+                await _applicationData.Data.SaveChangesAsync();
+            }
         }
     }
 }
