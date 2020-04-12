@@ -21,6 +21,11 @@ namespace USSC.Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        public async Task<User> FindUserById(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public void AssignRole(Role role, User user)
         {
             var connection = new UserRole()

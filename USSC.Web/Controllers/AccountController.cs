@@ -23,7 +23,7 @@ namespace USSC.Web.Controllers
         private readonly string _adminSubsystem;
 
         public AccountController(IRegistrationService registrationService, IAuthorizationService authorizationService, 
-            IAccessManager accessManager, IUserDataService userData)
+              IAccessManager accessManager, IUserDataService userData)
         {
             _registrationService = registrationService;
             _authorizationService = authorizationService;
@@ -110,6 +110,60 @@ namespace USSC.Web.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystem);
+
+            if (hasPermission)
+            {
+                var user = await _userData.GetUserData(id);
+                var roles = _userData.GetAllRoles();
+                var userRoles = await _userData.GetUserRoles(user.Id);
+
+                var viewModel = new RegistrationViewModel()
+                {
+                    Email = user.Email,
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Roles = roles.Select(r => new RoleOption() { RoleName = r, IsOptionSelected = userRoles.Contains(r) }).ToList()
+                };
+
+                return View(viewModel);
+            }
+
+            return Forbid();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(RegistrationViewModel model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var roles = model.Roles
+                    .FindAll(r => r.IsOptionSelected)
+                    .Select(r => r.RoleName)
+                    .ToList();
+
+                if (roles.Count == 0)
+                {
+                    ModelState.AddModelError("", "Выберите хотя бы одну роль");
+                    return View(model);
+                }
+
+                var user = await _userData.EditUser(id, model.Email, model.Name, model.LastName, model.Password, roles);
+
+                if (user != null)
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                ModelState.AddModelError("", "Пользователь с таким Email уже существует");
+            }
+
+            return View(model);
         }
     }
 }
