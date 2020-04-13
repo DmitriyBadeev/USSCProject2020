@@ -53,7 +53,7 @@ namespace USSC.Services.UserServices
             return users;
         }
 
-        public async Task<User> EditUser(int userId, string email, string name, string lastName, string password, IEnumerable<string> userRoles,
+        public async Task<User> EditUser(int userId, string email, string name, string lastName, string password,
             IEnumerable<string> roles)
         {
             var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == userId);
