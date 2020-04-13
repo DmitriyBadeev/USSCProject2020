@@ -153,7 +153,8 @@ namespace USSC.Web.Controllers
                     return View(model);
                 }
 
-                var user = await _userData.EditUser(id, model.Email, model.Name, model.LastName, model.Password, roles);
+                var userRoles = model.Roles.Select(r => r.RoleName);
+                var user = await _userData.EditUser(id, model.Email, model.Name, model.LastName, model.Password, userRoles, roles);
 
                 if (user != null)
                 {
