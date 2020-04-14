@@ -61,6 +61,7 @@ namespace USSC.Infrastructure.Repositories
 
         public void DeleteUser(int userId)
         {
+            RemoveUserRoles(userId);
             _context.Users.Remove(FindUserById(userId).Result);
         }
     }

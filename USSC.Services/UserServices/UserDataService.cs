@@ -96,7 +96,6 @@ namespace USSC.Services.UserServices
             var user = await _applicationData.Data.Users.FindUserById(userId);
             _logger.LogInformation($"Delete user {user.Name} {user.LastName} - {user.Email}");
 
-            _applicationData.Data.Users.RemoveUserRoles(userId);
             _applicationData.Data.Users.DeleteUser(userId);
             await _applicationData.Data.SaveChangesAsync();
 
