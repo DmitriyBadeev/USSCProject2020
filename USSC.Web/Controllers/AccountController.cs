@@ -134,7 +134,7 @@ namespace USSC.Web.Controllers
                 return View(viewModel);
             }
 
-            return Forbid();
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         [HttpPost]
@@ -164,6 +164,21 @@ namespace USSC.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystem);
+
+            if (hasPermission)
+            {
+                await _userData.DeteteUser(id);
+
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

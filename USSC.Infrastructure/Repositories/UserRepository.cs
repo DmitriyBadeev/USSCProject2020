@@ -58,5 +58,11 @@ namespace USSC.Infrastructure.Repositories
             foreach (var userRole in userRoles)
                 _context.UserRoles.Remove(userRole);
         }
+
+        public void DeleteUser(int userId)
+        {
+            RemoveUserRoles(userId);
+            _context.Users.Remove(FindUserById(userId).Result);
+        }
     }
 }

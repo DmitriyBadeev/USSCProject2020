@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using USSC.Infrastructure.Models;
@@ -10,10 +11,12 @@ namespace USSC.Services.UserServices
     public class UserDataService : IUserDataService
     {
         private readonly IApplicationDataService _applicationData;
+        private readonly ILogger<UserDataService> _logger;
 
-        public UserDataService(IApplicationDataService applicationData)
+        public UserDataService(IApplicationDataService applicationData, ILogger<UserDataService> logger)
         {
             _applicationData = applicationData;
+            _logger = logger;
         }
 
         public async Task<User> GetUserData(string email)
@@ -56,6 +59,7 @@ namespace USSC.Services.UserServices
         public async Task<User> EditUser(int userId, string email, string name, string lastName, string password,
             IEnumerable<string> roles)
         {
+            _logger.LogInformation($"Edit user {name} {lastName} - {email}");
             var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == userId);
 
             editUser.Email = email;
@@ -67,11 +71,14 @@ namespace USSC.Services.UserServices
 
             await AddRoles(editUser, roles);
 
+            _logger.LogInformation($"User {name} {lastName} - {email} edited successfully");
+
             return editUser;
         }
 
         private async Task AddRoles(User user, IEnumerable<string> roles)
         {
+            _logger.LogInformation($"Adding roles for user {user.Name} {user.LastName} - {user.Email}");
             var userEntity = await _applicationData.Data.Users.FindUserById(user.Id);
 
             foreach (var role in roles)
@@ -81,6 +88,18 @@ namespace USSC.Services.UserServices
             }
 
             await _applicationData.Data.SaveChangesAsync();
+            _logger.LogInformation($"Roles Added for user {user.Name} {user.LastName} - {user.Email} successfully");
+        }
+
+        public async Task DeteteUser(int userId)
+        {
+            var user = await _applicationData.Data.Users.FindUserById(userId);
+            _logger.LogInformation($"Delete user {user.Name} {user.LastName} - {user.Email}");
+
+            _applicationData.Data.Users.DeleteUser(userId);
+            await _applicationData.Data.SaveChangesAsync();
+
+            _logger.LogInformation($"User {user.Name} {user.LastName} - {user.Email} deleted successfully");
         }
     }
 }

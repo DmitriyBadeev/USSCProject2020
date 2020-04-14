@@ -12,5 +12,6 @@ namespace USSC.Services.UserServices.Interfaces
         Task<IEnumerable<string>> GetUserRoles(int userId);
         IEnumerable<User> GetAllUsers();
         Task<User> EditUser(int id, string email, string name, string lastName, string password, IEnumerable<string> roles);
+        Task DeteteUser(int userId);
     }
 }
