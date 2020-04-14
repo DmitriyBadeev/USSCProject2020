@@ -78,8 +78,9 @@ namespace USSC.Services.UserServices
             {
                 var roleEntity = await _applicationData.Data.Roles.FindRole(role);
                 _applicationData.Data.Users.AssignRole(roleEntity, userEntity);
-                await _applicationData.Data.SaveChangesAsync();
             }
+
+            await _applicationData.Data.SaveChangesAsync();
         }
     }
 }

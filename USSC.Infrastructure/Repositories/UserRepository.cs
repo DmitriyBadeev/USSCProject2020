@@ -51,7 +51,11 @@ namespace USSC.Infrastructure.Repositories
 
         public void RemoveUserRoles(int userId)
         {
-            foreach(var userRole in _context.UserRoles.Where(u => u.User.Id == userId))
+            var userRoles = _context.UserRoles
+                .Include(u => u.User)
+                .Where(u => u.User.Id == userId);
+
+            foreach (var userRole in userRoles)
                 _context.UserRoles.Remove(userRole);
         }
     }
