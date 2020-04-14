@@ -10,5 +10,6 @@ namespace USSC.Infrastructure.Interfaces
         Task<User> FindUserById(int id);
         void AssignRole(Role role, User user);
         Task<List<Role>> GetUserRoles(int userId);
+        void RemoveUserRoles(int userId);
     }
 }

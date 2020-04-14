@@ -53,15 +53,16 @@ namespace USSC.Services.UserServices
             return users;
         }
 
-        public async Task<User> EditUser(int id, string email, string name, string lastName, string password,
+        public async Task<User> EditUser(int userId, string email, string name, string lastName, string password,
             IEnumerable<string> roles)
         {
-            var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == id);
+            var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == userId);
 
             editUser.Email = email;
             editUser.Name = name;
             editUser.LastName = lastName;
-            editUser.Password = password;
+            editUser.Password = Helpers.ComputeHash(password);
+            _applicationData.Data.Users.RemoveUserRoles(userId);
             await _applicationData.Data.SaveChangesAsync();
 
             await AddRoles(editUser, roles);
@@ -72,18 +73,14 @@ namespace USSC.Services.UserServices
         private async Task AddRoles(User user, IEnumerable<string> roles)
         {
             var userEntity = await _applicationData.Data.Users.FindUserById(user.Id);
-            var userRoles = await _applicationData.Data.Users.GetUserRoles(user.Id);
 
             foreach (var role in roles)
             {
                 var roleEntity = await _applicationData.Data.Roles.FindRole(role);
-
-                foreach (var userRole in userRoles)
-                    if (!(userRole == roleEntity))
-                        _applicationData.Data.Users.AssignRole(roleEntity, userEntity);
-
-                await _applicationData.Data.SaveChangesAsync();
+                _applicationData.Data.Users.AssignRole(roleEntity, userEntity);
             }
+
+            await _applicationData.Data.SaveChangesAsync();
         }
     }
 }
