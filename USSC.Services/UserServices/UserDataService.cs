@@ -65,7 +65,12 @@ namespace USSC.Services.UserServices
             editUser.Email = email;
             editUser.Name = name;
             editUser.LastName = lastName;
-            editUser.Password = Helpers.ComputeHash(password);
+
+            if (password != null)
+            {
+                editUser.Password = Helpers.ComputeHash(password);
+            }
+
             _applicationData.Data.Users.RemoveUserRoles(userId);
             await _applicationData.Data.SaveChangesAsync();
 
@@ -91,7 +96,7 @@ namespace USSC.Services.UserServices
             _logger.LogInformation($"Roles Added for user {user.Name} {user.LastName} - {user.Email} successfully");
         }
 
-        public async Task DeteteUser(int userId)
+        public async Task DeleteUser(int userId)
         {
             var user = await _applicationData.Data.Users.FindUserById(userId);
             _logger.LogInformation($"Delete user {user.Name} {user.LastName} - {user.Email}");

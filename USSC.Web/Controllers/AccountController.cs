@@ -106,6 +106,7 @@ namespace USSC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -113,6 +114,7 @@ namespace USSC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystem);
@@ -123,7 +125,7 @@ namespace USSC.Web.Controllers
                 var roles = _userData.GetAllRoles();
                 var userRoles = await _userData.GetUserRoles(user.Id);
 
-                var viewModel = new RegistrationViewModel()
+                var viewModel = new EditViewModel()
                 {
                     Email = user.Email,
                     Name = user.Name,
@@ -138,7 +140,8 @@ namespace USSC.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(RegistrationViewModel model, int id)
+        [Authorize]
+        public async Task<IActionResult> Edit(EditViewModel model, int id)
         {
             if (ModelState.IsValid)
             {
@@ -167,13 +170,14 @@ namespace USSC.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystem);
 
             if (hasPermission)
             {
-                await _userData.DeteteUser(id);
+                await _userData.DeleteUser(id);
 
                 return RedirectToAction("Index", "Admin");
             }
