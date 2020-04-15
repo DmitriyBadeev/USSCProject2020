@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace USSC.Web.ViewModels
+namespace USSC.Web.ViewModels.Account
 {
-    public class EditViewModel
+    public class RegistrationViewModel
     {
         [Required(ErrorMessage = "Не указан Email")]
         public string Email { get; set; }
@@ -18,6 +15,7 @@ namespace USSC.Web.ViewModels
         public string LastName { get; set; }
 
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
@@ -25,6 +23,6 @@ namespace USSC.Web.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Выберите роли")]
-        public List<RoleOption> Roles { get; set; }
+        public List<Option> Roles { get; set; }
     }
 }

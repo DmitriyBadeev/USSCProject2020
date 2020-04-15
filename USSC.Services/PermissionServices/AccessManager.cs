@@ -20,6 +20,32 @@ namespace USSC.Services.PermissionServices
             _logger = logger;
         }
 
+        public IEnumerable<string> GetAllSubsystems()
+        {
+            return _applicationData.Data.Subsystems
+                .GetAll()
+                .Select(s => s.Name);
+        }
+
+        public void IssuePermission(Role role, string subsystem)
+        {
+            _logger.LogInformation($"Issue permission for {role.Name} in {subsystem}");
+            var subsystemEntity = _applicationData.Data.Subsystems.GetSubsystemByName(subsystem);
+
+            _applicationData.Data.Subsystems.IssuePermission(role, subsystemEntity);
+            _logger.LogInformation($"Permission for {role.Name} in {subsystem} issue successfully");
+        }
+
+        public async Task RemoveAllRolePermissions(string roleName)
+        {
+            _logger.LogInformation($"Removing all permissions for {roleName}");
+            var roleEntity = await _applicationData.Data.Roles.FindRole(roleName);
+
+            _applicationData.Data.Subsystems.RemoveAllPermissions(roleEntity);
+            await _applicationData.Data.SaveChangesAsync();
+            _logger.LogInformation($"Permissions for {roleName} removed successfully");
+        }
+
         public async Task<bool> HasPermission(string email, string subsystemName)
         {
             var user = await _applicationData.Data.Users.FindUserByEmail(email);
@@ -48,6 +74,16 @@ namespace USSC.Services.PermissionServices
 
             _logger.LogInformation($"User with id - {userId} has not permission for access in subsystem {subsystemName}");
             return false;
+        }
+
+        public async Task<IEnumerable<string>> GetAccessibleSubsystemsByRole(string role)
+        {
+            var subsystems = _applicationData.Data.Subsystems.GetAll();
+            var roleEntity = await _applicationData.Data.Roles.FindRole(role);
+
+            return subsystems
+                .Where(s => _applicationData.Data.Subsystems.HasPermission(new List<Role> {roleEntity}, s))
+                .Select(s => s.Name);
         }
 
         public async Task<IEnumerable<string>> GetAccessibleSubsystems(string email)

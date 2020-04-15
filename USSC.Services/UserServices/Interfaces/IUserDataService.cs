@@ -6,6 +6,10 @@ namespace USSC.Services.UserServices.Interfaces
 {
     public interface IUserDataService
     {
+        Task<bool> UpdateRoleName(string oldName, string newName);
+        Task<Role> FindRole(string role);
+        Task<bool> AddRole(string name);
+        Task RemoveRole(string roleName);
         IEnumerable<string> GetAllRoles();
         Task<User> GetUserData(string email);
         Task<User> GetUserData(int id);

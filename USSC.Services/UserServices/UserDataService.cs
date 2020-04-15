@@ -26,6 +26,67 @@ namespace USSC.Services.UserServices
             return user;
         }
 
+        public async Task<bool> AddRole(string name)
+        {
+            _logger.LogInformation($"Adding role {name}");
+
+            var existRole = await _applicationData.Data.Roles.FindRole(name);
+
+            if (existRole != null)
+            {
+                _logger.LogInformation($"Role with name {name} already exist");
+                return false;
+            }
+
+            var roleEntity = new Role() { Name = name };
+
+            _applicationData.Data.Roles.Add(roleEntity);
+            _applicationData.Data.SaveChanges();
+            _logger.LogInformation($"Role {name} added successfully");
+            return true;
+        }
+
+        public async Task<bool> UpdateRoleName(string oldName, string newName)
+        {
+            _logger.LogInformation($"Renaming role {oldName} to {newName}");
+
+            var existRole = await _applicationData.Data.Roles.FindRole(newName);
+
+            if (existRole != null && existRole.Name != oldName)
+            {
+                _logger.LogInformation($"Role with name {newName} already exist");
+                return false;
+            }
+
+            var role = await _applicationData.Data.Roles.FindRole(oldName);
+            role.Name = newName;
+
+            _applicationData.Data.Roles.Update(role);
+            await _applicationData.Data.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task RemoveRole(string roleName)
+        {
+            _logger.LogInformation($"Removing role {roleName}");
+
+            var roleEntity = await FindRole(roleName);
+
+            _applicationData.Data.Subsystems.RemoveAllPermissions(roleEntity);
+            _applicationData.Data.Users.RemoveUserRoles(roleName);
+            _applicationData.Data.Roles.Remove(roleEntity);
+            await _applicationData.Data.SaveChangesAsync();
+
+            _logger.LogInformation($"Role {roleName} removed successfully");
+        }
+
+        public async Task<Role> FindRole(string role)
+        {
+            var roleEntity = await _applicationData.Data.Roles.FindRole(role);
+
+            return roleEntity;
+        }
+
         public async Task<User> GetUserData(int id)
         {
             var user = await _applicationData.Data.Users.FindUserById(id);

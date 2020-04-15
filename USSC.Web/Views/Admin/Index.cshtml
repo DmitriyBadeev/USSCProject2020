@@ -3,10 +3,11 @@
     ViewData["Title"] = "Администрирование";
 }
 
-@model IEnumerable<UserViewModel>
+@model USSC.Web.ViewModels.Admin.AdminViewModel
 
-<h1 class="display-4 mb-2">Подсистема «Администрирование»</h1>
-<h2 class="mb-1">Управление пользователями</h2>
+<h1 class="display-4 mb-4">Подсистема «Администрирование»</h1>
+
+<h2 class="mb-3">Управление пользователями</h2>
 <table class="table">
     <tr>
         <th>ID</th>
@@ -17,7 +18,7 @@
         <th></th>
         <th></th>
     </tr>
-    @foreach (var user in Model)
+    @foreach (var user in Model.UserViewModels)
     {
         <tr>
             <td>@user.Id</td>
@@ -32,3 +33,24 @@
 </table>
 
 <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Зарегистрировать пользователя</a>
+
+<h2 class="mb-3 mt-4">Управление ролями</h2>
+<table class="table">
+    <tr>
+        <th>Роль</th>
+        <th>Доступные системы</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var role in Model.RoleViewModels)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td>@role.AccessibleSubsystems</td>
+            <td><a asp-controller="Account" asp-action="UpdateRole" asp-route-name="@role.Name">Редактировать</a></td>
+            <td><a asp-controller="Account" asp-action="DeleteRole" asp-route-name="@role.Name">Удалить</a></td>
+        </tr>
+    }
+</table>
+
+<a class="btn btn-outline-primary" asp-controller="Account" asp-action="AddRole">Добавить роль</a>
