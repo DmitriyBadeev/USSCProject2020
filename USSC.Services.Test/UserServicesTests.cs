@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using NUnit.Framework;
 using USSC.Services.UserServices;
 
@@ -22,6 +24,18 @@ namespace USSC.Services.Test
 
             Assert.AreEqual(hash1, hash2);
             Assert.AreNotEqual(hash2, hash3);
+        }
+
+        [Test]
+        public void DataTest()
+        {
+            var dateString = "20200414";
+            var format = "yyyyMMdd";
+            var culture = CultureInfo.InvariantCulture;
+
+            var dataTime = DateTime.ParseExact(dateString, format, culture);
+
+            var str = dataTime.ToString("ddd dd MMM yyyy h:mm tt zzz");
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using USSC.Infrastructure;
 using USSC.Infrastructure.Services;
+using USSC.Services.LogServices;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices;
 using USSC.Services.UserServices.Interfaces;
@@ -13,6 +14,7 @@ namespace USSC.Services
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<IEventLogService, EventLogService>();
             services.AddScoped<IApplicationDataService, ApplicationDataService>();
             services.AddScoped<ISeedData, SeedData>();
 

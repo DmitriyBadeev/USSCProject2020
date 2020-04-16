@@ -9,12 +9,13 @@ namespace USSC.Services.LogServices
 {
     public class EventLogService : IEventLogService
     {
-        private string _format = "yyyyMMdd";
+        private readonly string _format = "yyyyMMdd";
 
         public IEnumerable<string> GetLogs(string path, DateTime date)
         {
             var dateString = date.ToString(_format);
-            var filePath = path + "logs-" + dateString + ".txt";
+            var fileName = "logs-" + dateString + ".txt";
+            var filePath = Path.Combine(path, fileName);
 
             foreach (var log in File.ReadAllLines(filePath))
                 yield return log;
