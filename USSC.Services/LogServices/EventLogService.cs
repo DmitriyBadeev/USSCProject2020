@@ -28,6 +28,7 @@ namespace USSC.Services.LogServices
 
             foreach (var file in files)
                 dates.Add(GetLogDateFromName(file));
+            var test = 0;
 
             return dates;
         }
