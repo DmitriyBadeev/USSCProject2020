@@ -1,4 +1,4 @@
-﻿namespace USSC.Web.ViewModels
+﻿namespace USSC.Web.ViewModels.Admin
 {
     public class UserViewModel
     {

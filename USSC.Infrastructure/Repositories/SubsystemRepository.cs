@@ -27,6 +27,15 @@ namespace USSC.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public void RemoveAllPermissions(Role role)
+        {
+            var allPermissions = _context.RoleSubsystems
+                .Include(rs => rs.Role)
+                .Where(rs => rs.Role.Id == role.Id);
+
+            _context.RemoveRange(allPermissions);
+        }
+
         public bool HasPermission(List<Role> roles, Subsystem subsystem)
         {
             foreach (var role in roles)

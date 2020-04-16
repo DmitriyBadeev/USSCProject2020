@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-@model RegistrationViewModel
+@model EditViewModel
 
 <h1 class="display-4">Редактирование</h1>
 
@@ -30,8 +30,8 @@
             {
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" asp-for="Roles[i].IsOptionSelected" checked="@Model.Roles[i].IsOptionSelected"/>
-                    <input type="text" asp-for="Roles[i].RoleName" value="@Model.Roles[i].RoleName" hidden />
-                    <label class="form-check-label" asp-for="Roles[i].IsOptionSelected">@Model.Roles[i].RoleName</label>
+                    <input type="text" asp-for="Roles[i].Name" value="@Model.Roles[i].Name" hidden />
+                    <label class="form-check-label" asp-for="Roles[i].IsOptionSelected">@Model.Roles[i].Name</label>
                 </div>
             }
 

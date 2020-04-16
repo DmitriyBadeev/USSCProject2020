@@ -8,5 +8,6 @@ namespace USSC.Infrastructure.Interfaces
         void IssuePermission(Role role, Subsystem subsystem);
         Subsystem GetSubsystemByName(string name);
         bool HasPermission(List<Role> roles, Subsystem subsystem);
+        void RemoveAllPermissions(Role role);
     }
 }

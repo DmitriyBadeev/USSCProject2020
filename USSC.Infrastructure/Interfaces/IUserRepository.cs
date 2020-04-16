@@ -11,6 +11,7 @@ namespace USSC.Infrastructure.Interfaces
         void AssignRole(Role role, User user);
         Task<List<Role>> GetUserRoles(int userId);
         void RemoveUserRoles(int userId);
+        void RemoveUserRoles(string roleName);
         void DeleteUser(int userId);
     }
 }

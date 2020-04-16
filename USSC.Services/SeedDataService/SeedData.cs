@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using USSC.Infrastructure;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
+using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
 
 namespace USSC.Services
@@ -16,6 +17,7 @@ namespace USSC.Services
         private readonly AppDbContext _context;
         private readonly IRegistrationService _registrationService;
         private readonly IApplicationDataService _applicationData;
+        private readonly IAccessManager _accessManager;
 
         private readonly List<Role> _defaultRoles = new List<Role>
         {
@@ -32,12 +34,14 @@ namespace USSC.Services
             new Subsystem() { Name = Constants.RegistrySubsystem }
         };
 
-        public SeedData(ILogger<SeedData> logger, AppDbContext context, IRegistrationService registrationService, IApplicationDataService applicationData)
+        public SeedData(ILogger<SeedData> logger, AppDbContext context, IRegistrationService registrationService, 
+            IApplicationDataService applicationData, IAccessManager accessManager)
         {
             _logger = logger;
             _context = context;
             _registrationService = registrationService;
             _applicationData = applicationData;
+            _accessManager = accessManager;
         }
 
         public void Initialise()
@@ -96,15 +100,14 @@ namespace USSC.Services
                     if (subsystem.Name == "Администрирование") 
                         continue;
                     
-                    var subsystemEntity = _applicationData.Data.Subsystems.GetSubsystemByName(subsystem.Name);
                     var userRole = _applicationData.Data.Roles.FindRole(_defaultRoles[1].Name).Result;
-                    _applicationData.Data.Subsystems.IssuePermission(userRole, subsystemEntity);
+                    _accessManager.IssuePermission(userRole, subsystem.Name);
                 }
 
                 foreach (var subsystem in _subsystems)
                 {
                     var adminRole = _applicationData.Data.Roles.FindRole(_defaultRoles[0].Name).Result;
-                    _applicationData.Data.Subsystems.IssuePermission(adminRole, subsystem);
+                    _accessManager.IssuePermission(adminRole, subsystem.Name);
                 }
 
                 _logger.LogInformation("Default permissions added successfully");
