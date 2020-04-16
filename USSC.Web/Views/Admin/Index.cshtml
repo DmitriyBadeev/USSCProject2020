@@ -3,29 +3,54 @@
     ViewData["Title"] = "Администрирование";
 }
 
-@model IEnumerable<UserViewModel>
+@model USSC.Web.ViewModels.Admin.AdminViewModel
 
-    <h1 class="display-4">Подсистема «Администрирование»</h1>
-    <table class="table">
+<h1 class="display-4 mb-4">Подсистема «Администрирование»</h1>
+
+<h2 class="mb-3">Управление пользователями</h2>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>ФИО</th>
+        <th>Роли</th>
+        <th>Доступы</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var user in Model.UserViewModels)
+    {
         <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>ФИО</th>
-            <th>Роли</th>
-            <th>Доступы</th>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.Name</td>
+            <td>@user.Roles</td>
+            <td>@user.Accesses</td>
+            <td><a asp-controller="Account" asp-action="Edit" asp-route-id="@user.Id">Редактировать</a></td>
+            <td><a asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Удалить</a></td>
         </tr>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.Id</td>
-                <td>@user.Email</td>
-                <td>@user.Name</td>
-                <td>@user.Roles</td>
-                <td>@user.Accesses</td>
-                <td><a asp-controller="Account" asp-action="Edit" asp-route-id="@user.Id">Редактировать</a></td>
-                <td><a asp-controller="Account" asp-action="Delete" asp-route-id="@user.Id">Удалить</a></td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 
 <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Registration">Зарегистрировать пользователя</a>
+
+<h2 class="mb-3 mt-4">Управление ролями</h2>
+<table class="table">
+    <tr>
+        <th>Роль</th>
+        <th>Доступные системы</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var role in Model.RoleViewModels)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td>@role.AccessibleSubsystems</td>
+            <td><a asp-controller="Account" asp-action="UpdateRole" asp-route-name="@role.Name">Редактировать</a></td>
+            <td><a asp-controller="Account" asp-action="DeleteRole" asp-route-name="@role.Name">Удалить</a></td>
+        </tr>
+    }
+</table>
+
+<a class="btn btn-outline-primary" asp-controller="Account" asp-action="AddRole">Добавить роль</a>

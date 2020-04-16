@@ -55,8 +55,16 @@ namespace USSC.Infrastructure.Repositories
                 .Include(u => u.User)
                 .Where(u => u.User.Id == userId);
 
-            foreach (var userRole in userRoles)
-                _context.UserRoles.Remove(userRole);
+            _context.UserRoles.RemoveRange(userRoles);
+        }
+
+        public void RemoveUserRoles(string roleName)
+        {
+            var userRoles = _context.UserRoles
+                .Include(u => u.Role)
+                .Where(u => u.Role.Name == roleName);
+
+            _context.UserRoles.RemoveRange(userRoles);
         }
 
         public void DeleteUser(int userId)
