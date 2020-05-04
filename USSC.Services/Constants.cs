@@ -7,9 +7,8 @@ namespace USSC.Services
     public class Constants
     {
         public const string AdminSubsystem = "Администрирование";
-        public const string DocumentSubsystem = "Документы";
-        public const string PersonalSubsystem = "Персонал";
-        public const string RegistrySubsystem = "Реестр";
-        public const string TransportSubsystem = "Транспорт";
+        public const string OrganizationSubsystem = "Подрядные организации";
+
+        public const string AdminRole = "Администратор";
     }
 }

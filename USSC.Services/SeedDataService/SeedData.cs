@@ -21,17 +21,14 @@ namespace USSC.Services
 
         private readonly List<Role> _defaultRoles = new List<Role>
         {
-            new Role() { Name = "Администратор"},
-            new Role() { Name = "Пользователь" }
+            new Role() { Name = Constants.AdminRole},
+            new Role() { Name = "Представитель подрядной организации" }
         };
 
         private readonly List<Subsystem> _subsystems = new List<Subsystem>()
         {
             new Subsystem() { Name = Constants.AdminSubsystem },
-            new Subsystem() { Name = Constants.PersonalSubsystem },
-            new Subsystem() { Name = Constants.TransportSubsystem },
-            new Subsystem() { Name = Constants.DocumentSubsystem },
-            new Subsystem() { Name = Constants.RegistrySubsystem }
+            new Subsystem() { Name = Constants.OrganizationSubsystem }
         };
 
         public SeedData(ILogger<SeedData> logger, AppDbContext context, IRegistrationService registrationService, 
@@ -97,7 +94,7 @@ namespace USSC.Services
 
                 foreach (var subsystem in _subsystems)
                 {
-                    if (subsystem.Name == "Администрирование") 
+                    if (subsystem.Name == Constants.AdminSubsystem) 
                         continue;
                     
                     var userRole = _applicationData.Data.Roles.FindRole(_defaultRoles[1].Name).Result;

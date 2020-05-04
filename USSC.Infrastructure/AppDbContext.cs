@@ -17,6 +17,10 @@ namespace USSC.Infrastructure
         public DbSet<Subsystem> Subsystems { get; set; }
 
         public DbSet<RoleSubsystem> RoleSubsystems { get; set; }
+        
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Position> Positions { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options) { }
     }

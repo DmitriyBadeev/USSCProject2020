@@ -14,5 +14,6 @@ namespace USSC.Services.PermissionServices
         Task<IEnumerable<string>> GetAccessibleSubsystems(string email);
         Task<IEnumerable<string>> GetAccessibleSubsystems(int userId);
         Task<IEnumerable<string>> GetAccessibleSubsystemsByRole(string role);
+        Task<bool> IsAdmin(int userId);
     }
 }

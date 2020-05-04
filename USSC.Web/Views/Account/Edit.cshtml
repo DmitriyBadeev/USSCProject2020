@@ -1,54 +1,68 @@
-﻿
-@{
-    ViewData["Title"] = "Edit";
-}
-@model EditViewModel
+﻿@model EditViewModel
 
-<h1 class="display-4">Редактирование</h1>
+<h1>Редактирование</h1>
 
 <form asp-action="Edit" asp-controller="Account" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group col-lg-4">
-            <label asp-for="Email">Введите Email</label><br />
-            <input class="form-control" type="text" asp-for="Email" value="@Model.Email"/>
-            <span asp-validation-for="Email" />
-        </div>
-        <div class="form-group col-lg-4">
-            <label asp-for="Name">Введите Имя</label><br />
-            <input class="form-control" type="text" asp-for="Name" value="@Model.Name"/>
-            <span class="invalid-feedback" asp-validation-for="Name" />
-        </div>
-        <div class="form-group col-lg-4">
-            <label asp-for="LastName">Введите Фамилию</label><br />
-            <input class="form-control" type="text" asp-for="LastName" value="@Model.LastName"/>
-            <span class="invalid-feedback" asp-validation-for="LastName" />
-        </div>
-        <div class="form-group col-lg-4">
-            <label asp-for="Roles">Выберите роли</label><br />
-            @for (var i = 0; i < Model.Roles.Count; i++)
-            {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" asp-for="Roles[i].IsOptionSelected" checked="@Model.Roles[i].IsOptionSelected"/>
-                    <input type="text" asp-for="Roles[i].Name" value="@Model.Roles[i].Name" hidden />
-                    <label class="form-check-label" asp-for="Roles[i].IsOptionSelected">@Model.Roles[i].Name</label>
-                </div>
-            }
 
-            <span class="invalid-feedback" asp-validation-for="Roles" />
-        </div>
-        <div class="form-group col-lg-4">
-            <label asp-for="Password">Введите пароль</label><br />
-            <input class="form-control" asp-for="Password" />
-            <span class="invalid-feedback" asp-validation-for="Password" />
-        </div>
-        <div class="form-group col-lg-4">
-            <label asp-for="ConfirmPassword">Повторите пароль</label><br />
-            <input class="form-control" asp-for="ConfirmPassword" />
-            <span class="invalid-feedback" asp-validation-for="ConfirmPassword" />
-        </div>
-        <div class="form-group col-lg-3">
-            <input type="submit" class="btn btn-lg btn-block btn-outline-primary" value="Сохранить" />
-        </div>
+    <div class="input">
+        <label asp-for="Email">
+            Эл. почта:
+            <input type="text" asp-for="Email" value="@Model.Email"/>
+        </label>
     </div>
+
+    <div class="input">
+        <label asp-for="Name">
+            Имя:
+            <input type="text" asp-for="Name" value="@Model.Name"/>
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="LastName">
+            Фамилия:
+            <input type="text" asp-for="LastName" value="@Model.LastName"/>
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Patronymic">
+            Отчество:
+            <input type="text" asp-for="Patronymic" value="@Model.Patronymic"/>
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label class="main-label" asp-for="Roles">
+            Роль:
+            <div class="checkbox__wrapper">
+                @for (var i = 0; i < Model.Roles.Count; i++)
+                {
+                    <label asp-for="Roles[i].IsOptionSelected">
+                        <input type="checkbox" asp-for="Roles[i].IsOptionSelected" checked="@Model.Roles[i].IsOptionSelected"> @Model.Roles[i].Name
+                        <input type="text" asp-for="Roles[i].Name" value="@Model.Roles[i].Name" hidden />
+                    </label>
+                }
+            </div>
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Password">
+            Пароль:
+            <input type="password" asp-for="Password" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="ConfirmPassword">
+            Повтор:
+            <input type="password" asp-for="ConfirmPassword" />
+        </label>
+    </div>
+
+    <div class="ml-120 mb-20 danger" asp-validation-summary="All">
+    </div>
+
+    <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
 </form>

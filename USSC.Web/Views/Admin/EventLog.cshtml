@@ -1,29 +1,22 @@
-﻿
-@{
-    ViewData["Title"] = "Журнал событий";
-}
-@model EventLogViewModel
+﻿@model EventLogViewModel
 
-<h1 class="display-4 mb-4">Журнал событий</h1>
+<h1>Журнал событий</h1>
 
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-logs" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-        @Model.Dates[Model.CurrentDate].ToString("dd/MM/yyyy")
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown__current">@Model.Dates[Model.CurrentDate].ToString("dd/MM/yyyy") <span></span></div>
+    <div class="dropdown__droplist d-none">
         @for (var i = 0; i < Model.Dates.Count; i++)
         {
-            <a class="dropdown-item" asp-controller="Admin" asp-action="EventLog" asp-route-current=@i>
+            <a asp-controller="Admin" asp-action="EventLog" asp-route-current=@i>
                 @Model.Dates[i].ToString("dd/MM/yyyy")
             </a>
         }
     </div>
-    
-    <div class="logs">
-        @foreach (var log in Model.Logs)
-        {
-            <p>@log</p>
-        }
-    </div>
+</div>
+
+<div class="logs">
+    @foreach (var log in Model.Logs)
+    {
+        <p>@log</p>
+    }
 </div>
