@@ -14,6 +14,9 @@ namespace USSC.Web.ViewModels.Account
         [Required(ErrorMessage = "Не указана фамилия")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "Не указано отчество")]
+        public string Patronymic { get; set; }
+
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Не указан пароль")]
         public string Password { get; set; }

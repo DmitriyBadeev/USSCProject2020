@@ -97,7 +97,7 @@ namespace USSC.Web.Controllers
 
                 if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Organization");
                 }
 
                 ModelState.AddModelError("", "Неверный логин или пароль");

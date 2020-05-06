@@ -101,5 +101,13 @@ namespace USSC.Services.PermissionServices
                 .Where(s => _applicationData.Data.Subsystems.HasPermission(roles, s))
                 .Select(s => s.Name);
         }
+
+        public async Task<bool> IsAdmin(int userId)
+        {
+            var roles = await _applicationData.Data.Users.GetUserRoles(userId);
+            var adminRole = await _applicationData.Data.Roles.FindRole(Constants.AdminRole);
+
+            return roles.Contains(adminRole);
+        }
     }
 }
