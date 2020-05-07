@@ -6,6 +6,7 @@ namespace USSC.Services.UserServices.Interfaces
 {
     public interface IRegistrationService
     {
-        Task<User> RegisterUser(string email, string name, string lastName, string password, IEnumerable<string> roles);
+        Task<User> RegisterUser(string email, string phone, string name, string lastName,
+            string patronymic, string password, IEnumerable<string> roles);
     }
 }

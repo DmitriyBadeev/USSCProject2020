@@ -68,7 +68,8 @@ namespace USSC.Web.Controllers
                     return View(model);
                 }
 
-                var user = await _registrationService.RegisterUser(model.Email, model.Name, model.LastName, model.Password, roles);
+                var user = await _registrationService.RegisterUser(model.Email, model.Phone, model.Name, 
+                    model.LastName, model.Patronymic, model.Password, roles);
 
                 if (user != null)
                 {

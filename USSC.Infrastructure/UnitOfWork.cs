@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
 using USSC.Infrastructure.Interfaces;
-using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Repositories;
 
 namespace USSC.Infrastructure
@@ -16,6 +11,7 @@ namespace USSC.Infrastructure
         private UserRepository _users;
         private SubsystemRepository _subsystems;
         private RoleRepository _roles;
+        private OrganizationRepository _organizations;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -43,6 +39,14 @@ namespace USSC.Infrastructure
             get
             {
                 return _roles ??= new RoleRepository(_context);
+            }
+        }
+
+        public IOrganizationRepository Organizations
+        {
+            get
+            {
+                return _organizations ??= new OrganizationRepository(_context);
             }
         }
 

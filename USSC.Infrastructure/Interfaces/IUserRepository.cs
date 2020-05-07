@@ -6,6 +6,7 @@ namespace USSC.Infrastructure.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
+        IEnumerable<User> GetAllUsersWithRole(int roleId);
         Task<User> FindUserByEmail(string email);
         Task<User> FindUserById(int id);
         void AssignRole(Role role, User user);

@@ -26,6 +26,13 @@ namespace USSC.Services.UserServices
             return user;
         }
 
+        public IEnumerable<User> GetAllUsersWithRole(Role role)
+        {
+            var users = _applicationData.Data.Users.GetAllUsersWithRole(role.Id);
+
+            return users;
+        }
+
         public async Task<bool> AddRole(string name)
         {
             _logger.LogInformation($"Adding role {name}");

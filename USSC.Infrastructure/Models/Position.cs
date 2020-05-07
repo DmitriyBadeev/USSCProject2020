@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using USSC.Infrastructure.Interfaces;
+﻿using USSC.Infrastructure.Interfaces;
 
 namespace USSC.Infrastructure.Models
 {

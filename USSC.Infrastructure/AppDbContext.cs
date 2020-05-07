@@ -22,6 +22,8 @@ namespace USSC.Infrastructure
 
         public DbSet<Position> Positions { get; set; }
 
+        public DbSet<Organization> Organizations { get; set; }
+
         public AppDbContext(DbContextOptions options) : base(options) { }
     }
 }

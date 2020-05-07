@@ -30,6 +30,7 @@ namespace USSC.Web
                     options.AccessDeniedPath = new PathString("/Home/Denied");
                 });
             services.AddAccountServices();
+            services.AddCommonServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

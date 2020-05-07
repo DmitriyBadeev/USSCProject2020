@@ -6,6 +6,7 @@ namespace USSC.Services.UserServices.Interfaces
 {
     public interface IUserDataService
     {
+        IEnumerable<User> GetAllUsersWithRole(Role role);
         Task<bool> UpdateRoleName(string oldName, string newName);
         Task<Role> FindRole(string role);
         Task<bool> AddRole(string name);

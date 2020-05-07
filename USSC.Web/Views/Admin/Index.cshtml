@@ -57,5 +57,42 @@
         </tr>
     }
 </table>
+<a class="link-button button-primary mt-30 mb-40" asp-controller="Account" asp-action="AddRole">Добавить роль</a>
 
-<a class="link-button button-primary mt-30" asp-controller="Account" asp-action="AddRole">Добавить роль</a>
+<h2>Управление организациями</h2>
+<div class="filter">
+    <input type="text" class="filter__search" placeholder="Поиск">
+    <button class="button button-secondary">Применить</button>
+</div>
+<table class="table">
+    <tr class="table__header">
+        <th>Id</th>
+        <th>Подрядная организация</th>
+        <th>Представитель</th>
+        <th>Телефон</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var organization in Model.OrganizationViewModels)
+    {
+        <tr>
+            <td>@organization.Id</td>
+            <td>@organization.Name</td>
+
+            @if (organization.UserName == null)
+            {
+                <td><a href="#">Добавить представителя</a></td>
+                <td></td>
+            }
+            else
+            {
+                <td>@organization.UserName</td>
+                <td>@organization.UserPhone</td>
+            }
+
+            <td><a href="#">Редактировать</a></td>
+            <td><a class="danger" href="#">Удалить</a></td>
+        </tr>
+    }
+</table>
+<a class="link-button button-primary mt-30" asp-controller="Organization" asp-action="AddOrganization">Добавить организацию</a>

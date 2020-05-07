@@ -3,7 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using USSC.Infrastructure;
 using USSC.Infrastructure.Services;
 using USSC.Services.LogServices;
+using USSC.Services.OrganizationServices;
 using USSC.Services.PermissionServices;
+using USSC.Services.SeedDataService;
 using USSC.Services.UserServices;
 using USSC.Services.UserServices.Interfaces;
 
@@ -27,6 +29,13 @@ namespace USSC.Services
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             services.AddScoped<IUserDataService, UserDataService>();
             services.AddScoped<IAccessManager, AccessManager>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddCommonServices(this IServiceCollection services)
+        {
+            services.AddScoped<IOrganizationService, OrganizationService>();
 
             return services;
         }

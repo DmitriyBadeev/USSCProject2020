@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using USSC.Infrastructure;
 
 namespace USSC.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506194025_Organization")]
+    partial class Organization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,14 +81,12 @@ namespace USSC.Infrastructure.Migrations
                     b.Property<string>("OGRN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("RepresentativeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("RepresentativeId");
 
                     b.ToTable("Organizations");
                 });
@@ -224,9 +224,9 @@ namespace USSC.Infrastructure.Migrations
 
             modelBuilder.Entity("USSC.Infrastructure.Models.Organization", b =>
                 {
-                    b.HasOne("USSC.Infrastructure.Models.User", "User")
-                        .WithOne("Organization")
-                        .HasForeignKey("USSC.Infrastructure.Models.Organization", "UserId");
+                    b.HasOne("USSC.Infrastructure.Models.User", "Representative")
+                        .WithMany()
+                        .HasForeignKey("RepresentativeId");
                 });
 
             modelBuilder.Entity("USSC.Infrastructure.Models.Position", b =>
