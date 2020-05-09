@@ -26,7 +26,7 @@ namespace USSC.Infrastructure.Models
 
         public string MedicalPolicy { get; set; }
 
-        public List<Position> Positions { get; set; }
+        public Position Position { get; set; }
 
         public Organization Organization { get; set; }
     }

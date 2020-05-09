@@ -124,15 +124,17 @@ namespace USSC.Services.UserServices
             return users;
         }
 
-        public async Task<User> EditUser(int userId, string email, string name, string lastName, string password,
-            IEnumerable<string> roles)
+        public async Task<User> EditUser(int userId, string email, string phone, string name, string lastName, string patronymic,
+            string password, IEnumerable<string> roles)
         {
             _logger.LogInformation($"Edit user {name} {lastName} - {email}");
             var editUser = _applicationData.Data.Users.GetSingleOrDefault(u => u.Id == userId);
 
             editUser.Email = email;
+            editUser.Phone = phone;
             editUser.Name = name;
             editUser.LastName = lastName;
+            editUser.Patronymic = patronymic;
 
             if (password != null)
             {

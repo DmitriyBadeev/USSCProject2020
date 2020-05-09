@@ -7,12 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using USSC.Services;
 using USSC.Services.LogServices;
-using USSC.Services.OrganizationServices;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
-using USSC.Web.ViewModels.Account;
 using USSC.Web.ViewModels.Admin;
-using USSC.Web.ViewModels.Organization;
 
 namespace USSC.Web.Controllers
 {
@@ -22,17 +19,15 @@ namespace USSC.Web.Controllers
         private readonly IUserDataService _userDataService;
         private readonly IEventLogService _eventLogService;
         private readonly IHostEnvironment _hostEnvironment;
-        private readonly IOrganizationService _organizationService;
         private readonly string _adminSubsystemName;
 
         public AdminController(IAccessManager accessManager, IUserDataService userDataService, 
-            IEventLogService eventLogService, IHostEnvironment hostEnvironment, IOrganizationService organizationService)
+            IEventLogService eventLogService, IHostEnvironment hostEnvironment)
         {
             _accessManager = accessManager;
             _userDataService = userDataService;
             _eventLogService = eventLogService;
             _hostEnvironment = hostEnvironment;
-            _organizationService = organizationService;
             _adminSubsystemName = Constants.AdminSubsystem;
         }
 
@@ -46,13 +41,12 @@ namespace USSC.Web.Controllers
             {
                 var users = _userDataService.GetAllUsers();
                 var roles = _userDataService.GetAllRoles();
-                var organizations = _organizationService.GetAll();
 
                 var userViewModel = users.Select(u => new UserViewModel()
                 {
                     Id = u.Id,
                     Email = u.Email,
-                    Name = $"{u.Name} {u.LastName}",
+                    Name = $"{u.LastName} {u.Name} {u.Patronymic}",
                     Roles = string.Join(", ", _userDataService.GetUserRoles(u.Id).Result),
                     Accesses = string.Join(", ", _accessManager.GetAccessibleSubsystems(u.Id).Result)
                 });
@@ -63,30 +57,10 @@ namespace USSC.Web.Controllers
                     AccessibleSubsystems = string.Join(", ", _accessManager.GetAccessibleSubsystemsByRole(r).Result)
                 });
 
-                var organizationViewModel = organizations.Select(o =>
-                {
-                    string userName = null;
-                    string phone = null;
-                    if (o.User != null)
-                    {
-                        userName = $"{o.User.LastName} {o.User.Name} {o.User.Patronymic}";
-                        phone = o.User.Phone;
-                    }
-
-                    return new OrganizationViewModel()
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        UserName = userName,
-                        UserPhone = phone
-                    };
-                });
-
                 var adminViewModel = new AdminViewModel()
                 {
                     RoleViewModels = roleViewModel,
-                    UserViewModels = userViewModel,
-                    OrganizationViewModels = organizationViewModel
+                    UserViewModels = userViewModel
                 };
                 
                 return View(adminViewModel);

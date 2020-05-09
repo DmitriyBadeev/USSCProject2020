@@ -20,9 +20,24 @@
         @if (User.Identity.IsAuthenticated)
         {
             var userData = await dataService.GetUserData(User.Identity.Name);
-
+            
             <div class="header__profile">
-                <div class="header__name">@userData.Name @userData.LastName, ООО &laquo;Карусель&raquo;</div>
+                <div class="header__name">
+                    @userData.LastName 
+                    @userData.Name 
+                    @userData.Patronymic, 
+                    
+                    @if (userData.Organization != null)
+                    {
+                        @userData.Organization.Name;
+                    }
+                    else
+                    {
+                        var roles = string.Join(", ", await dataService.GetUserRoles(userData.Id));
+                        @roles
+                    }
+
+                </div>
                 <a class="header__btn" asp-controller="Account" asp-action="Logout">Выход</a>
             </div>
         }

@@ -8,6 +8,5 @@ namespace USSC.Web.ViewModels.Admin
     {
         public IEnumerable<UserViewModel> UserViewModels { get; set; }
         public IEnumerable<RoleViewModel> RoleViewModels { get; set; }
-        public IEnumerable<OrganizationViewModel> OrganizationViewModels { get; set; }
     }
 }

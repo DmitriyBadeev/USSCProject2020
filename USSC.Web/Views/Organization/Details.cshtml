@@ -1,4 +1,60 @@
-﻿
+﻿@model OrganizationViewModel
 
-<h1>Конкретная организация</h1>
+<h1>Подрядная организация @Model.Name</h1>
 
+<div class="d-flex">
+    <table class="info-table mr-100">
+        <tr>
+            <td class="info-table__title">ИНН</td>
+            <td>@Model.INN</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">ОГРН</td>
+            <td>@Model.OGRN</td>
+        </tr>
+    </table>
+    <table class="info-table">
+        <tr>
+            <td class="info-table__title">Представитель</td>
+            <td>@Model.UserName</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Телефон</td>
+            <td>@Model.Phone</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Эл. почта</td>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+</div>
+
+<h2>Сотрудники</h2>
+
+<div class="filter">
+    <input type="text" class="filter__search" placeholder="Поиск">
+    <button class="button button-secondary">Применить</button>
+</div>
+<table class="table">
+    <tr class="table__header">
+        <th>Id</th>
+        <th>ФИО сотрудника</th>
+        <th>Должность</th>
+        <th>Телефон</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var employer in Model.Employees)
+    {
+        <tr>
+            <td>@employer.Id</td>
+            <td>@employer.Name</td>
+            <td>@employer.Position</td>
+            <td>@employer.Phone</td>
+
+            <td><a href="#">Редактировать</a></td>
+            <td><a class="danger" href="#">Удалить</a></td>
+        </tr>
+    }
+</table>
+<a class="link-button button-primary mt-30" asp-controller="Employee" asp-action="AddEmployee" asp-route-id="@Model.Id">Добавить сотрудника</a>

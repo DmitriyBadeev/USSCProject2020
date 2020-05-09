@@ -7,28 +7,35 @@
     <div class="input">
         <label asp-for="Email">
             Эл. почта:
-            <input type="text" asp-for="Email" value="@Model.Email"/>
+            <input type="text" asp-for="Email" value="@Model.Email" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Phone">
+            Телефон:
+            <input type="text" asp-for="Phone" value="@Model.Phone" />
+        </label>
+    </div>
+    
+    <div class="input">
+        <label asp-for="LastName">
+            Фамилия:
+            <input type="text" asp-for="LastName" value="@Model.LastName" />
         </label>
     </div>
 
     <div class="input">
         <label asp-for="Name">
             Имя:
-            <input type="text" asp-for="Name" value="@Model.Name"/>
-        </label>
-    </div>
-
-    <div class="input">
-        <label asp-for="LastName">
-            Фамилия:
-            <input type="text" asp-for="LastName" value="@Model.LastName"/>
+            <input type="text" asp-for="Name" value="@Model.Name" />
         </label>
     </div>
 
     <div class="input">
         <label asp-for="Patronymic">
             Отчество:
-            <input type="text" asp-for="Patronymic" value="@Model.Patronymic"/>
+            <input type="text" asp-for="Patronymic" value="@Model.Patronymic" />
         </label>
     </div>
 

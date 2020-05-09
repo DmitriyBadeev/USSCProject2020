@@ -117,7 +117,7 @@ namespace USSC.Services.SeedDataService
             {
                 _logger.LogInformation("Registration superuser");
 
-                await _registrationService.RegisterUser("admin", "","Главный", "администратор", "системы", 
+                await _registrationService.RegisterUser("admin", "", "администратор", "Главный", "системы", 
                     "123", new List<string> {_defaultRoles[0].Name});
 
                 _logger.LogInformation("Superuser added successfully");

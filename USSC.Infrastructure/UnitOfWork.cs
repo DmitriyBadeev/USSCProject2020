@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using USSC.Infrastructure.Interfaces;
+using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Repositories;
 
 namespace USSC.Infrastructure
@@ -12,6 +13,7 @@ namespace USSC.Infrastructure
         private SubsystemRepository _subsystems;
         private RoleRepository _roles;
         private OrganizationRepository _organizations;
+        private Repository<Employee> _employees;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -47,6 +49,14 @@ namespace USSC.Infrastructure
             get
             {
                 return _organizations ??= new OrganizationRepository(_context);
+            }
+        }
+
+        public IRepository<Employee> Employees
+        {
+            get
+            {
+                return _employees ??= new Repository<Employee>(_context);
             }
         }
 

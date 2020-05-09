@@ -13,6 +13,8 @@ namespace USSC.Infrastructure.Interfaces
 
         IOrganizationRepository Organizations { get; }
 
+        IRepository<Employee> Employees { get; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

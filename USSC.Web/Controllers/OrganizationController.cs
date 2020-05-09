@@ -9,7 +9,7 @@ using USSC.Services.OrganizationServices;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
 using USSC.Web.ViewModels;
-using USSC.Web.ViewModels.Account;
+using USSC.Web.ViewModels.Employee;
 using USSC.Web.ViewModels.Organization;
 
 namespace USSC.Web.Controllers
@@ -57,13 +57,34 @@ namespace USSC.Web.Controllers
             {
                 var userData = await _userData.GetUserData(User.Identity.Name);
                 var isAdmin = await _accessManager.IsAdmin(userData.Id);
+                var organizations = _organizationService.GetAll(); 
 
                 if (!isAdmin)
                 {
-                    return RedirectToAction("Details", "Organization");
+                    var id = userData.Organization.Id;
+                    return RedirectToAction("Details", "Organization", new { organizationId = id });
                 }
 
-                return View();
+                var organizationViewModel = organizations.Select(o =>
+                {
+                    string userName = null;
+                    string phone = null;
+                    if (o.User != null)
+                    {
+                        userName = $"{o.User.LastName} {o.User.Name} {o.User.Patronymic}";
+                        phone = o.User.Phone;
+                    }
+
+                    return new OrganizationTableViewModel()
+                    {
+                        Id = o.Id,
+                        Name = o.Name,
+                        UserName = userName,
+                        UserPhone = phone
+                    };
+                });
+
+                return View(organizationViewModel);
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -71,13 +92,39 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Details(int organizationId)
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _organizationSubsystemName);
 
             if (hasPermission)
             {
-                return View();
+                var organization = _organizationService.GetById(organizationId);
+                var user = organization.User;
+
+                var userName = $"{user.LastName} {user.Name} {user.Patronymic}";
+
+                var employees = organization.Employees
+                    .Select(e => new EmployeeTableViewModel()
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Phone = e.Phone,
+                        Position = e.Position.Name
+                    });
+
+                var model = new OrganizationViewModel()
+                {
+                    Id = organizationId,
+                    Name = organization.Name,
+                    INN = organization.INN,
+                    OGRN = organization.OGRN,
+                    UserName = userName,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    Employees = employees
+                };
+
+                return View(model);
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -87,43 +134,55 @@ namespace USSC.Web.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrganization()
         {
-            var users = _userData.GetAllUsers().Select(u => new Select()
-            {
-                Id = u.Id,
-                Name = $"{u.Name} {u.LastName} {u.Patronymic}"
-            });
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _organizationSubsystemName);
 
-            var model = new PostOrganizationViewModel()
+            if (hasPermission)
             {
-                Users = users
-            };
+                var users = _userData.GetAllUsers().Select(u => new Select()
+                {
+                    Id = u.Id,
+                    Name = $"{u.LastName} {u.Name} {u.Patronymic}"
+                });
 
-            return View(model);
+                var model = new PostOrganizationViewModel()
+                {
+                    Users = users
+                };
+
+                return View(model);
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddOrganization(PostOrganizationViewModel model)
         {
-            var organization = new Organization()
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                INN = model.INN,
-                OGRN = model.OGRN
-            };
+                var organization = new Organization()
+                {
+                    Name = model.Name,
+                    INN = model.INN,
+                    OGRN = model.OGRN
+                };
 
-            if (model.SelectedUserId != null)
-            {
-                var selectedUserId = (int) model.SelectedUserId;
-                organization.UserId = selectedUserId;
+                if (model.SelectedUserId != null)
+                {
+                    var selectedUserId = (int)model.SelectedUserId;
+                    organization.UserId = selectedUserId;
 
-                var user = await _userData.GetUserData(selectedUserId);
-                organization.User = user;
+                    var user = await _userData.GetUserData(selectedUserId);
+                    organization.User = user;
+                }
+
+                _organizationService.Add(organization);
+
+                return RedirectToAction("Index", "Organization");
             }
 
-            _organizationService.Add(organization);
-
-            return RedirectToAction("Index", "Admin");
+            return View(model);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
@@ -39,7 +38,10 @@ namespace USSC.Services.OrganizationServices
 
         public Organization GetById(int id)
         {
-            return _applicationData.Data.Organizations.Get(id);
+            var organization = _applicationData.Data.Organizations.Get(id);
+            organization.Employees = _applicationData.Data.Organizations.GetEmployees(organization.Id);
+            organization.User = _applicationData.Data.Organizations.GetOrganizationUser(organization.Id);
+            return organization;
         }
 
         public void Add(Organization organization)
