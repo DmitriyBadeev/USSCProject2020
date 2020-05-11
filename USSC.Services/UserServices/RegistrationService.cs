@@ -18,8 +18,8 @@ namespace USSC.Services.UserServices
             _logger = logger;
         }
 
-        public async Task<User> RegisterUser(string email, string name, string lastName, string password, 
-            IEnumerable<string> roles)
+        public async Task<User> RegisterUser(string email, string phone, string name, string lastName, 
+            string patronymic, string password, IEnumerable<string> roles)
         {
             _logger.LogInformation($"Registration user {name} {lastName} - {email}");
             var existUser =_dataService.Data.Users.GetSingleOrDefault(u => u.Email == email);
@@ -29,8 +29,10 @@ namespace USSC.Services.UserServices
                 var newUser = new User()
                 {
                     Email = email,
+                    Phone = phone,
                     Name = name,
                     LastName = lastName,
+                    Patronymic = patronymic,
                     Password = Helpers.ComputeHash(password)
                 };
 

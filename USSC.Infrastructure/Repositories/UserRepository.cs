@@ -16,14 +16,29 @@ namespace USSC.Infrastructure.Repositories
             _context = context;
         }
 
+        public IEnumerable<User> GetAllUsersWithRole(int roleId)
+        {
+            var users = _context.UserRoles
+                .Include(r => r.Role)
+                .Include(r => r.User)
+                .Where(r => r.Role.Id == roleId)
+                .Select(r => r.User);
+
+            return users;
+        }
+
         public async Task<User> FindUserByEmail(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return await _context.Users
+                .Include(u => u.Organization)
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<User> FindUserById(int id)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await _context.Users
+                .Include(u => u.Organization)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public void AssignRole(Role role, User user)

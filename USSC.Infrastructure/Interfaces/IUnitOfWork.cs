@@ -11,6 +11,12 @@ namespace USSC.Infrastructure.Interfaces
 
         IRoleRepository Roles { get; }
 
+        IOrganizationRepository Organizations { get; }
+
+        IRepository<Employee> Employees { get; }
+
+        IRepository<Position> Positions { get; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

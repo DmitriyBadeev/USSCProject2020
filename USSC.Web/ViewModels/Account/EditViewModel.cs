@@ -5,8 +5,13 @@ namespace USSC.Web.ViewModels.Account
 {
     public class EditViewModel
     {
+        [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Не указан Email")]
         public string Email { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "Не указан Телефон")]
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }

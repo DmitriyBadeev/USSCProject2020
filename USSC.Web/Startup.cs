@@ -27,9 +27,10 @@ namespace USSC.Web
                 .AddCookie(options =>
                 {
                     options.LoginPath = new PathString("/Account/Login");
-                    options.AccessDeniedPath = new PathString("/Home/Denied");
+                    options.AccessDeniedPath = new PathString("/Common/Denied");
                 });
             services.AddAccountServices();
+            services.AddCommonServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,9 +41,10 @@ namespace USSC.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Common/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

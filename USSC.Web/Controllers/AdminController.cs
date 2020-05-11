@@ -1,18 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using USSC.Services;
 using USSC.Services.LogServices;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
-using USSC.Web.ViewModels;
 using USSC.Web.ViewModels.Admin;
 
 namespace USSC.Web.Controllers
@@ -50,7 +46,7 @@ namespace USSC.Web.Controllers
                 {
                     Id = u.Id,
                     Email = u.Email,
-                    Name = $"{u.Name} {u.LastName}",
+                    Name = $"{u.LastName} {u.Name} {u.Patronymic}",
                     Roles = string.Join(", ", _userDataService.GetUserRoles(u.Id).Result),
                     Accesses = string.Join(", ", _accessManager.GetAccessibleSubsystems(u.Id).Result)
                 });

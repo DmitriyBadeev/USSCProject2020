@@ -11,6 +11,8 @@ namespace USSC.Web.ViewModels.Account
         [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
 
+        public string OldName { get; set; }
+
         [Required(ErrorMessage = "Укажите доступы к подсистемам")]
         public List<Option> SubsystemAccesses { get; set; }
     }

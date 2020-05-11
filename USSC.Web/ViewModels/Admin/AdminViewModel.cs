@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using USSC.Web.ViewModels.Account;
+using USSC.Web.ViewModels.Organization;
 
 namespace USSC.Web.ViewModels.Admin
 {

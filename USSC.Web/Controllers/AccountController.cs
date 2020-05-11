@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -68,7 +66,8 @@ namespace USSC.Web.Controllers
                     return View(model);
                 }
 
-                var user = await _registrationService.RegisterUser(model.Email, model.Name, model.LastName, model.Password, roles);
+                var user = await _registrationService.RegisterUser(model.Email, model.Phone, model.Name, 
+                    model.LastName, model.Patronymic, model.Password, roles);
 
                 if (user != null)
                 {
@@ -129,8 +128,10 @@ namespace USSC.Web.Controllers
                 var viewModel = new EditViewModel()
                 {
                     Email = user.Email,
+                    Phone = user.Phone,
                     Name = user.Name,
                     LastName = user.LastName,
+                    Patronymic = user.Patronymic,
                     Roles = roles.Select(r => new Option() { Name = r, IsOptionSelected = userRoles.Contains(r) }).ToList()
                 };
 
@@ -158,7 +159,8 @@ namespace USSC.Web.Controllers
                     return View(model);
                 }
 
-                var user = await _userData.EditUser(id, model.Email, model.Name, model.LastName, model.Password, roles);
+                var user = await _userData.EditUser(id, model.Email, model.Phone, model.Name, model.LastName, model.Patronymic,
+                    model.Password, roles);
 
                 if (user != null)
                 {
@@ -270,11 +272,10 @@ namespace USSC.Web.Controllers
                     .Select(s => new Option() { Name = s, IsOptionSelected = accesses.Contains(s)})
                     .ToList();
 
-                ViewData["oldName"] = roleEntity.Name;
-
                 var viewModel = new PostRoleViewModel()
                 {
                     Name = roleEntity.Name,
+                    OldName = roleEntity.Name,
                     SubsystemAccesses = subsystemAccesses
                 };
                 return View(viewModel);
@@ -286,11 +287,11 @@ namespace USSC.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateRole(PostRoleViewModel model, string oldName)
+        public async Task<IActionResult> UpdateRole(PostRoleViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var isUpdate = await _userData.UpdateRoleName(oldName, model.Name);
+                var isUpdate = await _userData.UpdateRoleName(model.OldName, model.Name);
 
                 if (!isUpdate)
                 {
