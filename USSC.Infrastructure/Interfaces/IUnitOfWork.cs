@@ -15,6 +15,8 @@ namespace USSC.Infrastructure.Interfaces
 
         IRepository<Employee> Employees { get; }
 
+        IRepository<Position> Positions { get; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

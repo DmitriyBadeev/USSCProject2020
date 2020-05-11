@@ -107,9 +107,9 @@ namespace USSC.Web.Controllers
                     .Select(e => new EmployeeTableViewModel()
                     {
                         Id = e.Id,
-                        Name = e.Name,
+                        Name = $"{e.LastName} {e.Name} {e.Patronymic}",
                         Phone = e.Phone,
-                        Position = e.Position.Name
+                        Position = e.Position?.Name
                     });
 
                 var model = new OrganizationViewModel()
@@ -159,30 +159,25 @@ namespace USSC.Web.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrganization(PostOrganizationViewModel model)
         {
-            if (ModelState.IsValid)
+            var organization = new Organization()
             {
-                var organization = new Organization()
-                {
-                    Name = model.Name,
-                    INN = model.INN,
-                    OGRN = model.OGRN
-                };
+                Name = model.Name,
+                INN = model.INN,
+                OGRN = model.OGRN
+            };
 
-                if (model.SelectedUserId != null)
-                {
-                    var selectedUserId = (int)model.SelectedUserId;
-                    organization.UserId = selectedUserId;
+            if (model.SelectedUserId != null)
+            {
+                var selectedUserId = (int)model.SelectedUserId;
+                organization.UserId = selectedUserId;
 
-                    var user = await _userData.GetUserData(selectedUserId);
-                    organization.User = user;
-                }
-
-                _organizationService.Add(organization);
-
-                return RedirectToAction("Index", "Organization");
+                var user = await _userData.GetUserData(selectedUserId);
+                organization.User = user;
             }
 
-            return View(model);
+            _organizationService.Add(organization);
+
+            return RedirectToAction("Index", "Organization");
         }
     }
 }

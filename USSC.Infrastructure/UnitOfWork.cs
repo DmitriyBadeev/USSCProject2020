@@ -14,6 +14,7 @@ namespace USSC.Infrastructure
         private RoleRepository _roles;
         private OrganizationRepository _organizations;
         private Repository<Employee> _employees;
+        private Repository<Position> _positions;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -57,6 +58,14 @@ namespace USSC.Infrastructure
             get
             {
                 return _employees ??= new Repository<Employee>(_context);
+            }
+        }
+
+        public IRepository<Position> Positions
+        {
+            get
+            {
+                return _positions ??= new Repository<Position>(_context);
             }
         }
 

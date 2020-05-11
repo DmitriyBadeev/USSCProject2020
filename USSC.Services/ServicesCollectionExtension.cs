@@ -36,6 +36,7 @@ namespace USSC.Services
         public static IServiceCollection AddCommonServices(this IServiceCollection services)
         {
             services.AddScoped<IOrganizationService, OrganizationService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             return services;
         }
