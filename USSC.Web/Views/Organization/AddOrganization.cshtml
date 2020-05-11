@@ -1,0 +1,44 @@
+﻿@model USSC.Web.ViewModels.Organization.PostOrganizationViewModel
+<h1>Добавление организации</h1>
+
+<form asp-action="AddOrganization" asp-controller="Organization" asp-anti-forgery="true">
+
+    <div class="input">
+        <label asp-for="Name">
+            Название:
+            <input type="text" asp-for="Name" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="INN">
+            ИНН:
+            <input type="text" asp-for="INN" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="OGRN">
+            ОГРН:
+            <input type="text" asp-for="OGRN" />
+        </label>
+    </div>
+    
+    <div class="input">
+        <label>
+            Представитель:
+            <select asp-for="SelectedUserId">
+                <option selected="selected">Выберите представителя</option>
+                @foreach (var user in Model.Users)
+                {
+                    <option value="@user.Id">@user.Name</option>
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="ml-120 mb-20 danger" asp-validation-summary="All">
+    </div>
+
+    <button type="submit" class="button button-primary mt-10 ml-120">Добавить</button>
+</form>

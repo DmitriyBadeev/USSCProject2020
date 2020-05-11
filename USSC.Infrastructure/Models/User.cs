@@ -20,5 +20,7 @@ namespace USSC.Infrastructure.Models
         public string Password { get; set; }
 
         public List<UserRole> Roles { get; set; }
+
+        public Organization Organization { get; set; }
     }
 }

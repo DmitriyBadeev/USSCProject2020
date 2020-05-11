@@ -1,4 +1,4 @@
-﻿namespace USSC.Services
+﻿namespace USSC.Services.SeedDataService
 {
     public interface ISeedData
     {

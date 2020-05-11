@@ -9,7 +9,7 @@ using USSC.Infrastructure.Services;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
 
-namespace USSC.Services
+namespace USSC.Services.SeedDataService
 {
     public class SeedData : ISeedData
     {
@@ -117,8 +117,8 @@ namespace USSC.Services
             {
                 _logger.LogInformation("Registration superuser");
 
-                await _registrationService.RegisterUser("admin", "Главный", "администратор", "123",
-                    new List<string> {_defaultRoles[0].Name});
+                await _registrationService.RegisterUser("admin", "", "администратор", "Главный", "системы", 
+                    "123", new List<string> {_defaultRoles[0].Name});
 
                 _logger.LogInformation("Superuser added successfully");
             }

@@ -41,6 +41,9 @@ namespace USSC.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrganizationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PassportNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -55,7 +58,37 @@ namespace USSC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrganizationId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("USSC.Infrastructure.Models.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("INN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OGRN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("USSC.Infrastructure.Models.Position", b =>
@@ -65,7 +98,7 @@ namespace USSC.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -73,7 +106,8 @@ namespace USSC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
 
                     b.ToTable("Positions");
                 });
@@ -182,11 +216,27 @@ namespace USSC.Infrastructure.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("USSC.Infrastructure.Models.Employee", b =>
+                {
+                    b.HasOne("USSC.Infrastructure.Models.Organization", "Organization")
+                        .WithMany("Employees")
+                        .HasForeignKey("OrganizationId");
+                });
+
+            modelBuilder.Entity("USSC.Infrastructure.Models.Organization", b =>
+                {
+                    b.HasOne("USSC.Infrastructure.Models.User", "User")
+                        .WithOne("Organization")
+                        .HasForeignKey("USSC.Infrastructure.Models.Organization", "UserId");
+                });
+
             modelBuilder.Entity("USSC.Infrastructure.Models.Position", b =>
                 {
-                    b.HasOne("USSC.Infrastructure.Models.Employee", null)
-                        .WithMany("Positions")
-                        .HasForeignKey("EmployeeId");
+                    b.HasOne("USSC.Infrastructure.Models.Employee", "Employee")
+                        .WithOne("Position")
+                        .HasForeignKey("USSC.Infrastructure.Models.Position", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("USSC.Infrastructure.Models.RoleSubsystem", b =>

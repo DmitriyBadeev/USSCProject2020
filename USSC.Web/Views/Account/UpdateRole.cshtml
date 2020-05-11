@@ -4,14 +4,14 @@
 <h1>Редактирование роли</h1>
 
 <form asp-action="UpdateRole" asp-controller="Account" asp-anti-forgery="true">
-    
+
     <div class="input">
         <label asp-for="Name">
             Имя роли:
             <input type="text" asp-for="Name" value="@Model.Name" />
         </label>
     </div>
-
+    <input type="text" asp-for="OldName" hidden="hidden" value="@Model.OldName" />
     <div class="checkbox">
         <label class="main-label" asp-for="SubsystemAccesses">
             Роль:

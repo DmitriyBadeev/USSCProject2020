@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using USSC.Infrastructure.Interfaces;
 
@@ -11,12 +10,10 @@ namespace USSC.Infrastructure.Repositories
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDataModel
     {
-        private readonly AppDbContext _context;
         private readonly DbSet<TEntity> _entities;
 
         public Repository(AppDbContext context)
         {
-            _context = context;
             _entities = context.Set<TEntity>();
         }
 
