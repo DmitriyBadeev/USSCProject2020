@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Редактирование должности";
+}
+
+@model USSC.Web.ViewModels.Position.PositionViewModel
+
+<h1>Редактирование должности</h1>
+
+<form asp-action="EditPosition" asp-controller="Admin" asp-anti-forgery="true">
+
+    <div class="input">
+        <label asp-for="Name">
+            Имя:
+            <input type="text" asp-for="Name" value="@Model.Name" />
+        </label>
+    </div>
+
+    <div class="ml-120 mb-20 danger" asp-validation-summary="All">
+    </div>
+
+    <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
+</form>

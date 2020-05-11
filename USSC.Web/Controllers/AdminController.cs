@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using USSC.Services;
 using USSC.Services.LogServices;
+using USSC.Services.OrganizationServices;
 using USSC.Services.PermissionServices;
 using USSC.Services.UserServices.Interfaces;
 using USSC.Web.ViewModels.Admin;
+using USSC.Web.ViewModels.Position;
 
 namespace USSC.Web.Controllers
 {
@@ -18,15 +20,17 @@ namespace USSC.Web.Controllers
         private readonly IAccessManager _accessManager;
         private readonly IUserDataService _userDataService;
         private readonly IEventLogService _eventLogService;
+        private readonly IPositionService _positionService;
         private readonly IHostEnvironment _hostEnvironment;
         private readonly string _adminSubsystemName;
 
         public AdminController(IAccessManager accessManager, IUserDataService userDataService, 
-            IEventLogService eventLogService, IHostEnvironment hostEnvironment)
+            IEventLogService eventLogService, IPositionService positionService, IHostEnvironment hostEnvironment)
         {
             _accessManager = accessManager;
             _userDataService = userDataService;
             _eventLogService = eventLogService;
+            _positionService = positionService;
             _hostEnvironment = hostEnvironment;
             _adminSubsystemName = Constants.AdminSubsystem;
         }
@@ -41,6 +45,7 @@ namespace USSC.Web.Controllers
             {
                 var users = _userDataService.GetAllUsers();
                 var roles = _userDataService.GetAllRoles();
+                var positions = _positionService.GetAll();
 
                 var userViewModel = users.Select(u => new UserViewModel()
                 {
@@ -57,10 +62,17 @@ namespace USSC.Web.Controllers
                     AccessibleSubsystems = string.Join(", ", _accessManager.GetAccessibleSubsystemsByRole(r).Result)
                 });
 
+                var positionViewModel = positions.Select(p => new PositionViewModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                });
+
                 var adminViewModel = new AdminViewModel()
                 {
                     RoleViewModels = roleViewModel,
-                    UserViewModels = userViewModel
+                    UserViewModels = userViewModel,
+                    PositionViewModels = positionViewModel
                 };
                 
                 return View(adminViewModel);
@@ -95,6 +107,90 @@ namespace USSC.Web.Controllers
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeletePosition(int positionId)
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
+
+            if (hasPermission)
+            {
+                _positionService.Delete(positionId);
+
+                RedirectToAction("Index", "Admin");
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditPosition(int positionId)
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
+
+            if (hasPermission)
+            {
+                var position = _positionService.GetById(positionId);
+
+                var positionViewModel = new PositionViewModel()
+                {
+                    Id = position.Id,
+                    Name = position.Name
+                };
+
+                return View(positionViewModel);
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPosition(int positionId, PositionViewModel positionModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _positionService.Edit(positionId, positionModel.Name);
+
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return View(positionModel);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> AddPosition()
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
+
+            if (hasPermission)
+            {
+                var positionViewModel = new PositionViewModel();
+
+                return View(positionViewModel);
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPosition(PositionViewModel positionModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _positionService.Add(positionModel.Name);
+
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return View(positionModel);
         }
     }
 }
