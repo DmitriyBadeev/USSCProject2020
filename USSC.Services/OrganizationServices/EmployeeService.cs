@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
@@ -63,6 +64,30 @@ namespace USSC.Services.OrganizationServices
             _applicationData.Data.SaveChanges();
 
             _logger.LogInformation($"Employee with Id {id} removed successfully");
+        }
+
+        public void Edit(int id, string lastName, string name, string patronymic,
+            string phone, DateTime birthDay, string medical, 
+            string passNum, string passSer, int orgId, int posId)
+        {
+            var employee = GetById(id);
+
+            _logger.LogInformation($"Editing employee with Id {employee.Id}");
+
+            employee.LastName = lastName;
+            employee.Name = name;
+            employee.Patronymic = patronymic;
+            employee.Phone = phone;
+            employee.BirthDay = birthDay;
+            employee.MedicalPolicy = medical;
+            employee.PassportNumber = passNum;
+            employee.PassportSeries = passSer;
+            employee.Organization = _applicationData.Data.Organizations.Get(orgId);
+            employee.Position = _applicationData.Data.Positions.Get(posId);
+
+            _applicationData.Data.SaveChanges();
+
+            _logger.LogInformation($"Employee with Id {employee.Id} edited successfully");
         }
     }
 }

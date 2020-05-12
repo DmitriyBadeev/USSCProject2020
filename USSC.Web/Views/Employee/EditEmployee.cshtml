@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Редактирование сотрудника";
+}
+
+@model PostEmployeeViewModel
+
+<h1>Редактирование сотрудника</h1>
+
+<form asp-action="EditEmployee" asp-controller="Employee" asp-anti-forgery="true">
+
+    <div class="input">
+        <label asp-for="LastName">
+            Фамилия:
+            <input type="text" asp-for="LastName" value="@Model.LastName" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Name">
+            Имя:
+            <input type="text" asp-for="Name" value="@Model.Name" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Patronymic">
+            Отчество:
+            <input type="text" asp-for="Patronymic" value="@Model.Patronymic" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Email">
+            Эл. почта:
+            <input type="text" asp-for="Email" value="@Model.Email" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="Phone">
+            Телефон:
+            <input type="text" asp-for="Phone" value="@Model.Phone" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="PassportSeries">
+            Серия паспорта:
+            <input type="text" asp-for="PassportSeries" value="@Model.PassportSeries" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="PassportNumber">
+            Номер паспорта:
+            <input type="text" asp-for="PassportNumber" value="@Model.PassportNumber" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="MedicalPolicy">
+            Мед. полис:
+            <input type="text" asp-for="MedicalPolicy" value="@Model.MedicalPolicy" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="BirthDay">
+            Дата рождения:
+            <input type="date" asp-for="BirthDay" value="@Model.BirthDay" />
+        </label>
+    </div>
+
+    <div class="input">
+        <label>
+            Должность:
+            <select asp-for="SelectedPositionId">
+                <option selected="selected">Выберите должность</option>
+                @foreach (var position in Model.Positions)
+                {
+                    if (position.Id == Model.SelectedPositionId)
+                    {
+                        <option selected="selected">@position.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@position.Id">@position.Name</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <input type="text" hidden="hidden" asp-for="OrganizationId" value="@Model.OrganizationId" />
+
+    <div class="ml-120 mb-20 danger" asp-validation-summary="All">
+    </div>
+
+    <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
+</form>

@@ -18,7 +18,7 @@ namespace USSC.Web.Controllers
         private readonly IPositionService _positionService;
         private readonly IUserDataService _userData;
 
-        public EmployeeController(IEmployeeService employeeService, IOrganizationService organizationService, 
+        public EmployeeController(IEmployeeService employeeService, IOrganizationService organizationService,
             IPositionService positionService, IUserDataService userData)
         {
             _employeeService = employeeService;
@@ -114,6 +114,69 @@ namespace USSC.Web.Controllers
             _employeeService.Add(entity);
 
             return RedirectToAction("Details", "Organization", new { organizationId = model.OrganizationId });
+        }
+
+        [HttpGet]
+        public IActionResult EditEmployee(int id)
+        {
+            var employee = _employeeService.GetById(id);
+
+            var positions = _positionService.GetAll()
+                .Select(p => new Select()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+                .ToList();
+
+            var employeeModel = new PostEmployeeViewModel()
+            {
+                OrganizationId = employee.Id,
+                LastName = employee.LastName,
+                Name = employee.Name,
+                Email = employee.Email,
+                Patronymic = employee.Patronymic,
+                MedicalPolicy = employee.MedicalPolicy,
+                Phone = employee.Phone,
+                PassportNumber = employee.PassportNumber,
+                PassportSeries = employee.PassportSeries,
+                SelectedPositionId = employee.Position.Id,
+                Positions = positions,
+                BirthDay = employee.BirthDay
+            };
+
+            return View(employeeModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditEmployee(int id, PostEmployeeViewModel employeeModel)
+        {
+            _employeeService.Edit
+                (
+                    id, 
+                    employeeModel.LastName,
+                    employeeModel.Name,
+                    employeeModel.Patronymic,
+                    employeeModel.Phone,
+                    employeeModel.BirthDay,
+                    employeeModel.MedicalPolicy,
+                    employeeModel.PassportNumber,
+                    employeeModel.PassportSeries,
+                    employeeModel.OrganizationId,
+                    employeeModel.SelectedPositionId
+                );
+
+            return RedirectToAction("Details", "Organization", new { organizationId = employeeModel.OrganizationId });
+        }
+
+        [HttpGet]
+        public IActionResult DeleteEmployee(int id)
+        {
+            var employee = _employeeService.GetById(id);
+
+            _employeeService.Remove(id);
+
+            return RedirectToAction("Details", "Organization", new { organizationId = employee.OrganizationId });
         }
     }
 }
