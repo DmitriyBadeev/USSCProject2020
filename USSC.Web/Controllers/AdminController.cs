@@ -111,15 +111,15 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> DeletePosition(int positionId)
+        public async Task<IActionResult> DeletePosition(int id)
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
 
             if (hasPermission)
             {
-                _positionService.Delete(positionId);
+                _positionService.Delete(id);
 
-                RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Admin");
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -127,13 +127,13 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> EditPosition(int positionId)
+        public async Task<IActionResult> EditPosition(int id)
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
 
             if (hasPermission)
             {
-                var position = _positionService.GetById(positionId);
+                var position = _positionService.GetById(id);
 
                 var positionViewModel = new PositionViewModel()
                 {
@@ -150,11 +150,11 @@ namespace USSC.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPosition(int positionId, PositionViewModel positionModel)
+        public async Task<IActionResult> EditPosition(int id, PositionViewModel positionModel)
         {
             if (ModelState.IsValid)
             {
-                _positionService.Edit(positionId, positionModel.Name);
+                _positionService.Edit(id, positionModel.Name);
 
                 return RedirectToAction("Index", "Admin");
             }
