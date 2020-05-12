@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using USSC.Infrastructure.Interfaces;
+using System.Linq;
+using System.Threading.Tasks;
+using USSC.Web.ViewModels.Organization;
 
-namespace USSC.Infrastructure.Models
+namespace USSC.Web.ViewModels.Employee
 {
-    public class Employee : IDataModel
+    public class EmployeeViewModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string LastName { get; set; }
@@ -26,10 +26,8 @@ namespace USSC.Infrastructure.Models
 
         public string MedicalPolicy { get; set; }
 
-        public Position Position { get; set; }
+        public string Position { get; set; }
 
-        public int OrganizationId { get; set; }
-
-        public Organization Organization { get; set; }
+        public OrganizationViewModel Organization { get; set; }
     }
 }

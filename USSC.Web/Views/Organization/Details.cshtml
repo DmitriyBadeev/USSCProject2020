@@ -48,7 +48,7 @@
     {
         <tr>
             <td>@employer.Id</td>
-            <td>@employer.Name</td>
+            <td><a asp-controller="Employee" asp-action="Index" asp-route-employeeId="@employer.Id">@employer.Name</a></td>
             <td>@employer.Position</td>
             <td>@employer.Phone</td>
 

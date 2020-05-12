@@ -1,3 +1,62 @@
-﻿
-<h1>Работяга</h1>
+﻿@model EmployeeViewModel
 
+<h1>@Model.LastName @Model.Name @Model.Patronymic</h1>
+
+<div class="d-flex">
+    <table class="info-table mr-100">
+        <tr>
+            <td class="info-table__title">Должность</td>
+            <td>@Model.Position</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Серия и номер паспорта</td>
+            <td>@Model.PassportSeries @Model.PassportNumber</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Дата рождения</td>
+            <td>@Model.BirthDay</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Номер мед. полиса</td>
+            <td>@Model.MedicalPolicy</td>
+        </tr>
+    </table>
+    <table class="info-table">
+        <tr>
+            <td class="info-table__title">Телефон</td>
+            <td>@Model.Phone</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Эл. почта</td>
+            <td>@Model.Email</td>
+        </tr>
+    </table>
+</div>
+
+<h2 class="mt-40">Подрядная организация @Model.Organization.Name</h2>
+<div class="d-flex">
+    <table class="info-table mr-100">
+        <tr>
+            <td class="info-table__title">ИНН</td>
+            <td>@Model.Organization.INN</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">ОГРН</td>
+            <td>@Model.Organization.OGRN</td>
+        </tr>
+    </table>
+    <table class="info-table">
+        <tr>
+            <td class="info-table__title">Представитель</td>
+            <td>@Model.Organization.UserName</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Телефон</td>
+            <td>@Model.Organization.Phone</td>
+        </tr>
+        <tr>
+            <td class="info-table__title">Эл. почта</td>
+            <td>@Model.Organization.Email</td>
+        </tr>
+    </table>
+</div>
