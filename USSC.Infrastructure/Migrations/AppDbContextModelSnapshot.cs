@@ -41,7 +41,7 @@ namespace USSC.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrganizationId")
+                    b.Property<int>("OrganizationId")
                         .HasColumnType("int");
 
                     b.Property<string>("PassportNumber")
@@ -221,7 +221,9 @@ namespace USSC.Infrastructure.Migrations
                 {
                     b.HasOne("USSC.Infrastructure.Models.Organization", "Organization")
                         .WithMany("Employees")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("USSC.Infrastructure.Models.Organization", b =>

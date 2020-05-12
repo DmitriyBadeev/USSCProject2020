@@ -23,7 +23,15 @@ namespace USSC.Services.OrganizationServices
 
         public Employee GetById(int id)
         {
-            return _applicationData.Data.Employees.Get(id);
+            var employee = _applicationData.Data.Employees.Get(id);
+
+            var organization = _applicationData.Data.Organizations.Get(employee.OrganizationId);
+            var position = _applicationData.Data.Positions.GetSingleOrDefault(p => p.EmployeeId == id);
+
+            employee.Position = position;
+            employee.Organization = organization;
+
+            return employee;
         }
 
         public void Add(Employee employee)
