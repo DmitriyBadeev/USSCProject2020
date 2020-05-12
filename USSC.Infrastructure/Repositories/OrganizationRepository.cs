@@ -31,5 +31,10 @@ namespace USSC.Infrastructure.Repositories
                 .SingleOrDefault(o => o.Id == organizationId)
                 ?.User;
         }
+
+        public List<Position> GetPositions()
+        {
+            return _context.Positions.ToList();
+        }
     }
 }

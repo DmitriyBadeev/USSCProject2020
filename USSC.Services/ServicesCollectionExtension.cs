@@ -37,6 +37,7 @@ namespace USSC.Services
         {
             services.AddScoped<IOrganizationService, OrganizationService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IPositionService, PositionService>();
 
             return services;
         }

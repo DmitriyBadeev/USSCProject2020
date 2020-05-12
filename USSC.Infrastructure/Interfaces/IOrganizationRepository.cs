@@ -7,5 +7,6 @@ namespace USSC.Infrastructure.Interfaces
     {
         List<Employee> GetEmployees(int organizationId);
         User GetOrganizationUser(int organizationId);
+        List<Position> GetPositions();
     }
 }
