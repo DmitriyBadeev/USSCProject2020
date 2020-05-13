@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "Редактирование сотрудника";
-}
-
-@model PostEmployeeViewModel
+﻿@model EditEmployeeViewModel
 
 <h1>Редактирование сотрудника</h1>
 
@@ -68,7 +63,7 @@
     <div class="input">
         <label asp-for="BirthDay">
             Дата рождения:
-            <input type="date" asp-for="BirthDay" value="@Model.BirthDay" />
+            <input type="date" asp-for="BirthDay" value="@Model.BirthDay.ToString("yyyy-MM-dd")" />
         </label>
     </div>
 
@@ -81,7 +76,7 @@
                 {
                     if (position.Id == Model.SelectedPositionId)
                     {
-                        <option selected="selected">@position.Name</option>
+                        <option selected="selected" value="@position.Id">@position.Name</option>
                     }
                     else
                     {
@@ -96,6 +91,8 @@
 
     <div class="ml-120 mb-20 danger" asp-validation-summary="All">
     </div>
+    
+    <input type="text" asp-for="@Model.Id" value="@Model.Id" hidden="hidden"/>
 
     <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
 </form>

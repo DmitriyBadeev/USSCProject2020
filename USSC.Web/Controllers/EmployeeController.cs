@@ -129,9 +129,10 @@ namespace USSC.Web.Controllers
                 })
                 .ToList();
 
-            var employeeModel = new PostEmployeeViewModel()
+            var employeeModel = new EditEmployeeViewModel()
             {
-                OrganizationId = employee.Id,
+                Id = id,
+                OrganizationId = employee.OrganizationId,
                 LastName = employee.LastName,
                 Name = employee.Name,
                 Email = employee.Email,
@@ -149,11 +150,11 @@ namespace USSC.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditEmployee(int id, PostEmployeeViewModel employeeModel)
+        public IActionResult EditEmployee(EditEmployeeViewModel employeeModel)
         {
             _employeeService.Edit
                 (
-                    id, 
+                    employeeModel.Id, 
                     employeeModel.LastName,
                     employeeModel.Name,
                     employeeModel.Patronymic,

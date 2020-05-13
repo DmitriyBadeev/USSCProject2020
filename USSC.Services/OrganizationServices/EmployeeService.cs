@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
@@ -27,7 +26,7 @@ namespace USSC.Services.OrganizationServices
             var employee = _applicationData.Data.Employees.Get(id);
 
             var organization = _applicationData.Data.Organizations.Get(employee.OrganizationId);
-            var position = _applicationData.Data.Positions.GetSingleOrDefault(p => p.EmployeeId == id);
+            var position = _applicationData.Data.Positions.Get(employee.PositionId);
 
             employee.Position = position;
             employee.Organization = organization;
@@ -83,6 +82,7 @@ namespace USSC.Services.OrganizationServices
             employee.PassportNumber = passNum;
             employee.PassportSeries = passSer;
             employee.Organization = _applicationData.Data.Organizations.Get(orgId);
+            employee.PositionId = posId;
             employee.Position = _applicationData.Data.Positions.Get(posId);
 
             _applicationData.Data.SaveChanges();

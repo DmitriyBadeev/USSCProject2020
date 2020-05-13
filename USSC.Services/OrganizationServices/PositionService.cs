@@ -62,8 +62,7 @@ namespace USSC.Services.OrganizationServices
 
             var position = new Position()
             {
-                Name = name,
-                EmployeeId = null
+                Name = name
             };
 
             _applicationData.Data.Positions.Add(position);

@@ -1,4 +1,5 @@
-﻿using USSC.Infrastructure.Interfaces;
+﻿using System.Collections.Generic;
+using USSC.Infrastructure.Interfaces;
 
 namespace USSC.Infrastructure.Models
 {
@@ -8,8 +9,6 @@ namespace USSC.Infrastructure.Models
 
         public string Name { get; set; }
 
-        public int? EmployeeId { get; set; }
-
-        public Employee Employee { get; set; }
+        public List<Employee> Employee { get; set; }
     }
 }

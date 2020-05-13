@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using USSC.Infrastructure.Interfaces;
 
 namespace USSC.Infrastructure.Models
@@ -25,6 +24,8 @@ namespace USSC.Infrastructure.Models
         public DateTime BirthDay { get; set; }
 
         public string MedicalPolicy { get; set; }
+
+        public int PositionId { get; set; }
 
         public Position Position { get; set; }
 

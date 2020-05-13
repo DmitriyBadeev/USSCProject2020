@@ -52,8 +52,8 @@
             <td>@employer.Position</td>
             <td>@employer.Phone</td>
 
-            <td><a href="#">Редактировать</a></td>
-            <td><a class="danger" href="#">Удалить</a></td>
+            <td><a asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employer.Id">Редактировать</a></td>
+            <td><a class="danger" asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@employer.Id">Удалить</a></td>
         </tr>
     }
 </table>
