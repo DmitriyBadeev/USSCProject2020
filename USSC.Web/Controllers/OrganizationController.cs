@@ -20,6 +20,7 @@ namespace USSC.Web.Controllers
         private readonly IUserDataService _userData;
         private readonly IOrganizationService _organizationService;
         private readonly string _organizationSubsystemName;
+        private readonly string _adminSubsystemName;
 
         public OrganizationController(IAccessManager accessManager, IUserDataService userData, IOrganizationService organizationService)
         {
@@ -27,6 +28,7 @@ namespace USSC.Web.Controllers
             _userData = userData;
             _organizationService = organizationService;
             _organizationSubsystemName = Constants.OrganizationSubsystem;
+            _adminSubsystemName = Constants.AdminSubsystem;
         }
 
         public async Task<IActionResult> Main()
@@ -99,9 +101,14 @@ namespace USSC.Web.Controllers
             if (hasPermission)
             {
                 var organization = _organizationService.GetById(organizationId);
+
                 var user = organization.User;
 
-                var userName = $"{user.LastName} {user.Name} {user.Patronymic}";
+                string userName = null;
+                if (user != null)
+                {
+                    userName = $"{user.LastName} {user.Name} {user.Patronymic}";
+                }
 
                 var employees = organization.Employees
                     .Select(e => new EmployeeTableViewModel()
@@ -119,8 +126,8 @@ namespace USSC.Web.Controllers
                     INN = organization.INN,
                     OGRN = organization.OGRN,
                     UserName = userName,
-                    Email = user.Email,
-                    Phone = user.Phone,
+                    Email = user?.Email,
+                    Phone = user?.Phone,
                     Employees = employees
                 };
 
@@ -134,11 +141,12 @@ namespace USSC.Web.Controllers
         [Authorize]
         public async Task<IActionResult> AddOrganization()
         {
-            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _organizationSubsystemName);
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
 
             if (hasPermission)
             {
-                var users = _userData.GetAllUsers().Select(u => new Select()
+                var users = _userData.GetAllUsers()
+                    .Select(u => new Select()
                 {
                     Id = u.Id,
                     Name = $"{u.LastName} {u.Name} {u.Patronymic}"
@@ -176,6 +184,72 @@ namespace USSC.Web.Controllers
             }
 
             _organizationService.Add(organization);
+
+            return RedirectToAction("Index", "Organization");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditOrganization(int id)
+        {
+            var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
+
+            if (hasPermission)
+            {
+                var organization = _organizationService.GetById(id);
+                var users = _userData.GetAllUsers()
+                    .Select(u => new Select()
+                    {
+                        Id = u.Id,
+                        Name = $"{u.LastName} {u.Name} {u.Patronymic}"
+                    });
+
+                var model = new EditOrganizationViewModel()
+                {
+                    Id = organization.Id,
+                    Name = organization.Name,
+                    SelectedUserId = organization.UserId,
+                    INN = organization.INN,
+                    OGRN = organization.OGRN,
+                    Users = users
+                };
+
+                return View(model);
+            }
+
+            return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditOrganization(EditOrganizationViewModel model)
+        {
+            var organization = _organizationService.GetById(model.Id);
+
+            organization.Name = model.Name;
+            organization.INN = model.INN;
+            organization.OGRN = model.OGRN;
+
+            if (model.SelectedUserId != null)
+            {
+                var userId = (int)model.SelectedUserId;
+                var user = await _userData.GetUserData(userId);
+
+                organization.User = user;
+            }
+            
+            organization.UserId = model.SelectedUserId;
+
+            _organizationService.Update(organization);
+
+            return RedirectToAction("Index", "Organization");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult RemoveOrganization(int id)
+        {
+            _organizationService.Delete(id);
 
             return RedirectToAction("Index", "Organization");
         }

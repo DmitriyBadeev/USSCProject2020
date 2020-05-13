@@ -1,0 +1,54 @@
+﻿@model EditOrganizationViewModel
+
+<h1>Редактирование организации</h1>
+
+<form asp-action="EditOrganization" asp-controller="Organization" asp-anti-forgery="true">
+
+    <div class="input">
+        <label asp-for="Name">
+            Название:
+            <input type="text" asp-for="Name" value="@Model.Name"/>
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="INN">
+            ИНН:
+            <input type="text" asp-for="INN" value="@Model.INN"/>
+        </label>
+    </div>
+
+    <div class="input">
+        <label asp-for="OGRN">
+            ОГРН:
+            <input type="text" asp-for="OGRN" value="@Model.OGRN"/>
+        </label>
+    </div>
+
+    <div class="input">
+        <label>
+            Представитель:
+            <select asp-for="SelectedUserId">
+                <option selected="selected">Выберите представителя</option>
+                @foreach (var user in Model.Users)
+                {
+                    if (user.Id == Model.SelectedUserId)
+                    {
+                        <option value="@user.Id" selected="selected">@user.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@user.Id">@user.Name</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="ml-120 mb-20 danger" asp-validation-summary="All">
+    </div>
+
+    <input type="text" asp-for="Id" value="@Model.Id" hidden="hidden" />
+
+    <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
+</form>

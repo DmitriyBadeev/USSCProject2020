@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using USSC.Infrastructure.Models;
 using USSC.Services.OrganizationServices;
@@ -11,6 +13,7 @@ using USSC.Web.ViewModels.Organization;
 
 namespace USSC.Web.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;
@@ -72,18 +75,10 @@ namespace USSC.Web.Controllers
         [HttpGet]
         public IActionResult AddEmployee(int id)
         {
-            var positions = _positionService.GetAll()
-                .Select(p => new Select()
-                {
-                    Id = p.Id,
-                    Name = p.Name
-                })
-                .ToList();
-
             var model = new PostEmployeeViewModel()
             {
                 OrganizationId = id,
-                Positions = positions,
+                Positions = GetPositions(),
                 BirthDay = new DateTime(2000, 1, 1)
             };
 
@@ -93,6 +88,13 @@ namespace USSC.Web.Controllers
         [HttpPost]
         public IActionResult AddEmployee(PostEmployeeViewModel model)
         {
+            if (model.SelectedPositionId == 0)
+            {
+                ModelState.AddModelError("", "Выберите должность работника");
+                model.Positions = GetPositions();
+                return View(model);
+            }
+
             var position = _employeeService.GetPositionById(model.SelectedPositionId);
             var organization = _organizationService.GetById(model.OrganizationId);
 
@@ -152,6 +154,13 @@ namespace USSC.Web.Controllers
         [HttpPost]
         public IActionResult EditEmployee(EditEmployeeViewModel employeeModel)
         {
+            if (employeeModel.SelectedPositionId == 0)
+            {
+                ModelState.AddModelError("", "Выберите должность работника");
+                employeeModel.Positions = GetPositions();
+                return View(employeeModel);
+            }
+
             _employeeService.Edit
                 (
                     employeeModel.Id, 
@@ -178,6 +187,17 @@ namespace USSC.Web.Controllers
             _employeeService.Remove(id);
 
             return RedirectToAction("Details", "Organization", new { organizationId = employee.OrganizationId });
+        }
+
+        private List<Select> GetPositions()
+        {
+            return _positionService.GetAll()
+                .Select(p => new Select()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                })
+                .ToList();
         }
     }
 }

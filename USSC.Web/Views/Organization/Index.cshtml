@@ -19,11 +19,11 @@
     {
         <tr>
             <td>@organization.Id</td>
-            <td>@organization.Name</td>
+            <td><a asp-controller="Organization" asp-action="Details" asp-route-organizationId="@organization.Id">@organization.Name</a></td>
 
             @if (organization.UserName == null)
             {
-                <td><a href="#">Добавить представителя</a></td>
+                <td><a asp-controller="Organization" asp-action="EditOrganization" asp-route-id="@organization.Id">Добавить представителя</a></td>
                 <td></td>
             }
             else
@@ -32,8 +32,8 @@
                 <td>@organization.UserPhone</td>
             }
 
-            <td><a href="#">Редактировать</a></td>
-            <td><a class="danger" href="#">Удалить</a></td>
+            <td><a asp-controller="Organization" asp-action="EditOrganization" asp-route-id="@organization.Id">Редактировать</a></td>
+            <td><a class="danger" asp-controller="Organization" asp-action="RemoveOrganization" asp-route-id="@organization.Id">Удалить</a></td>
         </tr>
     }
 </table>

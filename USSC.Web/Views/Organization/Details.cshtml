@@ -13,20 +13,24 @@
             <td>@Model.OGRN</td>
         </tr>
     </table>
-    <table class="info-table">
-        <tr>
-            <td class="info-table__title">Представитель</td>
-            <td>@Model.UserName</td>
-        </tr>
-        <tr>
-            <td class="info-table__title">Телефон</td>
-            <td>@Model.Phone</td>
-        </tr>
-        <tr>
-            <td class="info-table__title">Эл. почта</td>
-            <td>@Model.Email</td>
-        </tr>
-    </table>
+    @if (Model.UserName != null)
+    {
+        <table class="info-table">
+            <tr>
+                <td class="info-table__title">Представитель</td>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <td class="info-table__title">Телефон</td>
+                <td>@Model.Phone</td>
+            </tr>
+            <tr>
+                <td class="info-table__title">Эл. почта</td>
+                <td>@Model.Email</td>
+            </tr>
+        </table>
+    }
+
 </div>
 
 <h2>Сотрудники</h2>
