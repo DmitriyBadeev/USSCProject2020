@@ -1,1 +1,1 @@
-"use strict";document.querySelectorAll(".dropdown__current").forEach(function(e){e.addEventListener("click",function(e){e.currentTarget.nextElementSibling.classList.toggle("d-none")})});
+"use strict";document.querySelectorAll(".dropdown__current").forEach(function(e){e.addEventListener("click",function(e){e.currentTarget.nextElementSibling.classList.toggle("d-none")})});var logs=document.querySelectorAll(".logs").forEach(function(e){e.scrollTop=e.scrollHeight});
