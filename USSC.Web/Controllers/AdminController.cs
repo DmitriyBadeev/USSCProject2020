@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -37,7 +38,7 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string userSearch = "", string roleSearch = "", string positionSearch = "")
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _adminSubsystemName);
 
@@ -46,33 +47,47 @@ namespace USSC.Web.Controllers
                 var users = _userDataService.GetAllUsers();
                 var roles = _userDataService.GetAllRoles();
                 var positions = _positionService.GetAll();
+                userSearch ??= "";
+                roleSearch ??= "";
+                positionSearch ??= "";
 
-                var userViewModel = users.Select(u => new UserViewModel()
-                {
-                    Id = u.Id,
-                    Email = u.Email,
-                    Name = $"{u.LastName} {u.Name} {u.Patronymic}",
-                    Roles = string.Join(", ", _userDataService.GetUserRoles(u.Id).Result),
-                    Accesses = string.Join(", ", _accessManager.GetAccessibleSubsystems(u.Id).Result)
-                });
+                var userViewModel = users
+                    .Select(u => new UserViewModel()
+                    {
+                        Id = u.Id,
+                        Email = u.Email,
+                        Name = $"{u.LastName} {u.Name} {u.Patronymic}",
+                        Roles = string.Join(", ", _userDataService.GetUserRoles(u.Id).Result),
+                        Accesses = string.Join(", ", _accessManager.GetAccessibleSubsystems(u.Id).Result)
+                    })
+                    .Where(u => 
+                        u.Name.Contains(userSearch, StringComparison.OrdinalIgnoreCase) ||
+                        u.Email.Contains(userSearch, StringComparison.OrdinalIgnoreCase));
 
-                var roleViewModel = roles.Select(r => new RoleViewModel()
-                {
-                    Name = r,
-                    AccessibleSubsystems = string.Join(", ", _accessManager.GetAccessibleSubsystemsByRole(r).Result)
-                });
+                var roleViewModel = roles
+                    .Select(r => new RoleViewModel()
+                    {
+                        Name = r,
+                        AccessibleSubsystems = string.Join(", ", _accessManager.GetAccessibleSubsystemsByRole(r).Result)
+                    })
+                    .Where(r => r.Name.Contains(roleSearch, StringComparison.OrdinalIgnoreCase));
 
-                var positionViewModel = positions.Select(p => new PositionViewModel()
-                {
-                    Id = p.Id,
-                    Name = p.Name
-                });
+                var positionViewModel = positions
+                    .Select(p => new PositionViewModel()
+                    {
+                        Id = p.Id,
+                        Name = p.Name
+                    })
+                    .Where(p => p.Name.Contains(positionSearch, StringComparison.OrdinalIgnoreCase));
 
                 var adminViewModel = new AdminViewModel()
                 {
                     RoleViewModels = roleViewModel,
                     UserViewModels = userViewModel,
-                    PositionViewModels = positionViewModel
+                    PositionViewModels = positionViewModel,
+                    UserSearch = userSearch,
+                    PositionSearch = positionSearch,
+                    RoleSearch = roleSearch
                 };
                 
                 return View(adminViewModel);

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -51,7 +52,7 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _organizationSubsystemName);
 
@@ -59,7 +60,8 @@ namespace USSC.Web.Controllers
             {
                 var userData = await _userData.GetUserData(User.Identity.Name);
                 var isAdmin = await _accessManager.IsAdmin(userData.Id);
-                var organizations = _organizationService.GetAll(); 
+                var organizations = _organizationService.GetAll();
+                search ??= "";
 
                 if (!isAdmin)
                 {
@@ -67,26 +69,41 @@ namespace USSC.Web.Controllers
                     return RedirectToAction("Details", "Organization", new { organizationId = id });
                 }
 
-                var organizationViewModel = organizations.Select(o =>
+                var organizationTableViewModels = organizations
+                    .Select(o =>
+                    {
+                        string userName = null;
+                        string phone = null;
+                        if (o.User != null)
+                        {
+                            userName = $"{o.User.LastName} {o.User.Name} {o.User.Patronymic}";
+                            phone = o.User.Phone;
+                        }
+
+                        return new OrganizationTableViewModel()
+                        {
+                            Id = o.Id,
+                            Name = o.Name,
+                            UserName = userName,
+                            UserPhone = phone
+                        };
+                    })
+                    .Where(o =>
+                    {
+                        if (o.UserName != null)
+                            return o.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                                   o.UserName.Contains(search, StringComparison.OrdinalIgnoreCase);
+
+                        return o.Name.Contains(search, StringComparison.OrdinalIgnoreCase);
+                    });
+
+                var organizationMasterViewModel = new OrganizationMasterViewModel()
                 {
-                    string userName = null;
-                    string phone = null;
-                    if (o.User != null)
-                    {
-                        userName = $"{o.User.LastName} {o.User.Name} {o.User.Patronymic}";
-                        phone = o.User.Phone;
-                    }
+                    Organizations = organizationTableViewModels,
+                    SearchString = search
+                };
 
-                    return new OrganizationTableViewModel()
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        UserName = userName,
-                        UserPhone = phone
-                    };
-                });
-
-                return View(organizationViewModel);
+                return View(organizationMasterViewModel);
             }
 
             return Forbid(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -94,15 +111,15 @@ namespace USSC.Web.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Details(int organizationId)
+        public async Task<IActionResult> Details(int organizationId, string search = "")
         {
             var hasPermission = await _accessManager.HasPermission(User.Identity.Name, _organizationSubsystemName);
-
+            
             if (hasPermission)
             {
                 var organization = _organizationService.GetById(organizationId);
-
                 var user = organization.User;
+                search ??= "";
 
                 string userName = null;
                 if (user != null)
@@ -117,7 +134,8 @@ namespace USSC.Web.Controllers
                         Name = $"{e.LastName} {e.Name} {e.Patronymic}",
                         Phone = e.Phone,
                         Position = e.Position?.Name
-                    });
+                    })
+                    .Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
 
                 var model = new OrganizationViewModel()
                 {
@@ -128,7 +146,8 @@ namespace USSC.Web.Controllers
                     UserName = userName,
                     Email = user?.Email,
                     Phone = user?.Phone,
-                    Employees = employees
+                    Employees = employees,
+                    SearchString = search
                 };
 
                 return View(model);

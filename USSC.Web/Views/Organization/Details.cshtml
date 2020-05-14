@@ -36,8 +36,11 @@
 <h2>Сотрудники</h2>
 
 <div class="filter">
-    <input type="text" class="filter__search" placeholder="Поиск">
-    <button class="button button-secondary">Применить</button>
+    <form method="get" asp-controller="Organization" asp-action="Details">
+        <input type="text" class="filter__search" placeholder="Поиск" value="@Model.SearchString" name="search">
+        <input type="text" name="organizationId" value="@Model.Id" hidden="hidden">
+        <button type="submit" class="button button-secondary">Применить</button>
+    </form>
 </div>
 <table class="table">
     <tr class="table__header">

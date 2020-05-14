@@ -7,8 +7,12 @@
 
 <h2>Управление пользователями</h2>
 <div class="filter">
-    <input type="text" class="filter__search" placeholder="Поиск">
-    <button class="button button-secondary">Применить</button>
+    <form method="get" asp-controller="Admin" asp-action="Index">
+        <input type="text" class="filter__search" placeholder="Поиск" value="@Model.UserSearch" name="userSearch">
+        <input type="text" value="@Model.RoleSearch" name="roleSearch" hidden="hidden">
+        <input type="text" value="@Model.PositionSearch" name="positionSearch" hidden="hidden">
+        <button type="submit" class="button button-secondary">Применить</button>
+    </form>
 </div>
 <table class="table">
     <tr class="table__header">
@@ -37,8 +41,12 @@
 
 <h2>Управление ролями</h2>
 <div class="filter">
-    <input type="text" class="filter__search" placeholder="Поиск">
-    <button class="button button-secondary">Применить</button>
+    <form method="get" asp-controller="Admin" asp-action="Index">
+        <input type="text" class="filter__search" placeholder="Поиск" value="@Model.RoleSearch" name="roleSearch">
+        <input type="text" value="@Model.UserSearch" name="userSearch" hidden="hidden">
+        <input type="text" value="@Model.PositionSearch" name="positionSearch" hidden="hidden">
+        <button type="submit" class="button button-secondary">Применить</button>
+    </form>
 </div>
 <table class="table">
     <tr class="table__header">
@@ -61,8 +69,12 @@
 
 <h2>Управление должностями сотрудников подрядных организаций</h2>
 <div class="filter">
-    <input type="text" class="filter__search" placeholder="Поиск">
-    <button class="button button-secondary">Применить</button>
+    <form method="get" asp-controller="Admin" asp-action="Index">
+        <input type="text" class="filter__search" placeholder="Поиск" value="@Model.PositionSearch" name="positionSearch">
+        <input type="text" value="@Model.UserSearch" name="userSearch" hidden="hidden">
+        <input type="text" value="@Model.RoleSearch" name="roleSearch" hidden="hidden">
+        <button type="submit" class="button button-secondary">Применить</button>
+    </form>
 </div>
 <table class="table">
     <tr class="table__header">

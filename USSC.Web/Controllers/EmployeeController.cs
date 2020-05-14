@@ -36,12 +36,13 @@ namespace USSC.Web.Controllers
             var employee = _employeeService.GetById(employeeId);
             var organization = employee.Organization;
 
-            if (organization.UserId == null)
+            User user = null;
+            string userName = null;
+            if (organization.UserId != null)
             {
-                throw new NullReferenceException("User hasn't in database");
+                user = await _userData.GetUserData((int)organization.UserId);
+                userName = $"{user.LastName} {user.Name} {user.Patronymic}";
             }
-
-            var user = await _userData.GetUserData((int)organization.UserId);
 
             var organizationModel = new OrganizationViewModel()
             {
@@ -49,9 +50,9 @@ namespace USSC.Web.Controllers
                 Name = organization.Name,
                 INN = organization.INN,
                 OGRN = organization.OGRN,
-                Email = user.Email,
-                Phone = user.Phone,
-                UserName = $"{user.LastName} {user.Name} {user.Patronymic}"
+                Email = user?.Email,
+                Phone = user?.Phone,
+                UserName = userName
             };
 
             var employeeModel = new EmployeeViewModel()

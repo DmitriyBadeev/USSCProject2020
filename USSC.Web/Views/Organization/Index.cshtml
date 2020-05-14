@@ -1,10 +1,12 @@
-﻿@model IEnumerable<OrganizationTableViewModel>
+﻿@model OrganizationMasterViewModel
 
 <h1>Управление организациями</h1>
 
 <div class="filter">
-    <input type="text" class="filter__search" placeholder="Поиск">
-    <button class="button button-secondary">Применить</button>
+    <form method="get" asp-controller="Organization" asp-action="Index">
+        <input type="text" class="filter__search" placeholder="Поиск" value="@Model.SearchString" name="search">
+        <button type="submit" class="button button-secondary">Применить</button>
+    </form>
 </div>
 <table class="table">
     <tr class="table__header">
@@ -15,7 +17,7 @@
         <th></th>
         <th></th>
     </tr>
-    @foreach (var organization in Model)
+    @foreach (var organization in Model.Organizations)
     {
         <tr>
             <td>@organization.Id</td>

@@ -45,18 +45,21 @@
             <td>@Model.Organization.OGRN</td>
         </tr>
     </table>
-    <table class="info-table">
-        <tr>
-            <td class="info-table__title">Представитель</td>
-            <td>@Model.Organization.UserName</td>
-        </tr>
-        <tr>
-            <td class="info-table__title">Телефон</td>
-            <td>@Model.Organization.Phone</td>
-        </tr>
-        <tr>
-            <td class="info-table__title">Эл. почта</td>
-            <td>@Model.Organization.Email</td>
-        </tr>
-    </table>
+    @if (Model.Organization.UserName != null)
+    {
+        <table class="info-table">
+            <tr>
+                <td class="info-table__title">Представитель</td>
+                <td>@Model.Organization.UserName</td>
+            </tr>
+            <tr>
+                <td class="info-table__title">Телефон</td>
+                <td>@Model.Organization.Phone</td>
+            </tr>
+            <tr>
+                <td class="info-table__title">Эл. почта</td>
+                <td>@Model.Organization.Email</td>
+            </tr>
+        </table>
+    }
 </div>

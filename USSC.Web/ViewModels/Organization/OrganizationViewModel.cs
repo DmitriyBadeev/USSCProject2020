@@ -19,6 +19,8 @@ namespace USSC.Web.ViewModels.Organization
 
         public string Email { get; set; }
 
+        public string SearchString { get; set; }
+
         public IEnumerable<EmployeeTableViewModel> Employees { get; set; }
     }
 }
