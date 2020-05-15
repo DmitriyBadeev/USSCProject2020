@@ -27,6 +27,8 @@ namespace USSC.Infrastructure.Models
 
         public int PositionId { get; set; }
 
+        public int PenaltyPoints { get; set; }
+
         public Position Position { get; set; }
 
         public int OrganizationId { get; set; }

@@ -133,7 +133,8 @@ namespace USSC.Web.Controllers
                         Id = e.Id,
                         Name = $"{e.LastName} {e.Name} {e.Patronymic}",
                         Phone = e.Phone,
-                        Position = e.Position?.Name
+                        Position = e.Position?.Name,
+                        PenaltyPoints = e.PenaltyPoints
                     })
                     .Where(e => e.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
 

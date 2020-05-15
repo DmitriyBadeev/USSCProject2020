@@ -48,6 +48,7 @@
         <th>ФИО сотрудника</th>
         <th>Должность</th>
         <th>Телефон</th>
+        <th>Штрафные баллы</th>
         <th></th>
         <th></th>
     </tr>
@@ -58,6 +59,7 @@
             <td><a asp-controller="Employee" asp-action="Index" asp-route-employeeId="@employer.Id">@employer.Name</a></td>
             <td>@employer.Position</td>
             <td>@employer.Phone</td>
+            <td>@employer.PenaltyPoints</td>
 
             <td><a asp-controller="Employee" asp-action="EditEmployee" asp-route-id="@employer.Id">Редактировать</a></td>
             <td><a class="danger" asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@employer.Id">Удалить</a></td>

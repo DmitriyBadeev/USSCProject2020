@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using USSC.Infrastructure.Models;
 using USSC.Services.OrganizationServices;
+using USSC.Services.OrganizationServices.Interfaces;
 using USSC.Services.UserServices.Interfaces;
 using USSC.Web.ViewModels;
 using USSC.Web.ViewModels.Employee;
@@ -67,6 +68,7 @@ namespace USSC.Web.Controllers
                 PassportNumber = employee.PassportNumber,
                 PassportSeries = employee.PassportSeries,
                 Position = employee.Position?.Name,
+                PenaltyPoints = employee.PenaltyPoints,
                 Organization = organizationModel
             };
 
@@ -111,6 +113,7 @@ namespace USSC.Web.Controllers
                 PassportSeries = model.PassportSeries,
                 Phone = model.Phone,
                 Position = position,
+                PenaltyPoints = 0,
                 Organization = organization
             };
 
@@ -145,6 +148,7 @@ namespace USSC.Web.Controllers
                 PassportNumber = employee.PassportNumber,
                 PassportSeries = employee.PassportSeries,
                 SelectedPositionId = employee.Position.Id,
+                PenaltyPoints = employee.PenaltyPoints,
                 Positions = positions,
                 BirthDay = employee.BirthDay
             };
@@ -174,7 +178,8 @@ namespace USSC.Web.Controllers
                     employeeModel.PassportNumber,
                     employeeModel.PassportSeries,
                     employeeModel.OrganizationId,
-                    employeeModel.SelectedPositionId
+                    employeeModel.SelectedPositionId,
+                   employeeModel.PenaltyPoints
                 );
 
             return RedirectToAction("Details", "Organization", new { organizationId = employeeModel.OrganizationId });

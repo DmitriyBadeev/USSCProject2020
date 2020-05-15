@@ -1,7 +1,7 @@
 ﻿using System;
 using USSC.Infrastructure.Models;
 
-namespace USSC.Services.OrganizationServices
+namespace USSC.Services.OrganizationServices.Interfaces
 {
     public interface IEmployeeService
     {
@@ -12,6 +12,6 @@ namespace USSC.Services.OrganizationServices
         void Remove(int id);
         void Edit(int id, string lastName, string name, string patronymic,
             string phone, DateTime birthDay, string medical,
-            string passNum, string passSer, int orgId, int posId);
+            string passNum, string passSer, int orgId, int posId, int penaltyPoints);
     }
 }

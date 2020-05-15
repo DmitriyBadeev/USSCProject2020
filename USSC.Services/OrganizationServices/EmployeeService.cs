@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using USSC.Infrastructure.Migrations;
 using USSC.Infrastructure.Models;
 using USSC.Infrastructure.Services;
+using USSC.Services.OrganizationServices.Interfaces;
 
 namespace USSC.Services.OrganizationServices
 {
@@ -67,7 +69,7 @@ namespace USSC.Services.OrganizationServices
 
         public void Edit(int id, string lastName, string name, string patronymic,
             string phone, DateTime birthDay, string medical, 
-            string passNum, string passSer, int orgId, int posId)
+            string passNum, string passSer, int orgId, int posId, int penaltyPoints)
         {
             var employee = GetById(id);
 
@@ -84,6 +86,7 @@ namespace USSC.Services.OrganizationServices
             employee.Organization = _applicationData.Data.Organizations.Get(orgId);
             employee.PositionId = posId;
             employee.Position = _applicationData.Data.Positions.Get(posId);
+            employee.PenaltyPoints = penaltyPoints;
 
             _applicationData.Data.SaveChanges();
 

@@ -38,6 +38,10 @@ namespace USSC.Web.ViewModels.Employee
         [Required(ErrorMessage = "Не указан мед. полис")]
         public string MedicalPolicy { get; set; }
 
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Не указаны штрафные баллы")]
+        public int PenaltyPoints { get; set; }
+
         public IEnumerable<Select> Positions { get; set; }
 
         public int SelectedPositionId { get; set; }

@@ -28,6 +28,8 @@ namespace USSC.Web.ViewModels.Employee
 
         public string Position { get; set; }
 
+        public int PenaltyPoints { get; set; }
+
         public OrganizationViewModel Organization { get; set; }
     }
 }

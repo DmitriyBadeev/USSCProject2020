@@ -61,6 +61,13 @@
     </div>
 
     <div class="input">
+        <label asp-for="PenaltyPoints">
+            Штрафные баллы:
+            <input type="number" min="0" step="1" asp-for="PenaltyPoints" value="@Model.PenaltyPoints" />
+        </label>
+    </div>
+
+    <div class="input">
         <label asp-for="BirthDay">
             Дата рождения:
             <input type="date" asp-for="BirthDay" value="@Model.BirthDay.ToString("yyyy-MM-dd")" />
@@ -91,8 +98,8 @@
 
     <div class="ml-120 mb-20 danger" asp-validation-summary="All">
     </div>
-    
-    <input type="text" asp-for="@Model.Id" value="@Model.Id" hidden="hidden"/>
+
+    <input type="text" asp-for="@Model.Id" value="@Model.Id" hidden="hidden" />
 
     <button type="submit" class="button button-primary mt-10 ml-120">Сохранить</button>
 </form>

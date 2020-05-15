@@ -4,6 +4,7 @@ using USSC.Infrastructure;
 using USSC.Infrastructure.Services;
 using USSC.Services.LogServices;
 using USSC.Services.OrganizationServices;
+using USSC.Services.OrganizationServices.Interfaces;
 using USSC.Services.PermissionServices;
 using USSC.Services.SeedDataService;
 using USSC.Services.UserServices;

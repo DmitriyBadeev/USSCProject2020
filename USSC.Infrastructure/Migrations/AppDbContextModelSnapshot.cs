@@ -53,6 +53,9 @@ namespace USSC.Infrastructure.Migrations
                     b.Property<string>("Patronymic")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PenaltyPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 

@@ -2,6 +2,7 @@
 .vs
 .editorconfig
 Logs/
+.config
 
 *.swp
 *.*~
